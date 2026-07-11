@@ -21,12 +21,14 @@
   },
   "identity": {
     "algorithm": "sha256",
-    "digest": "89a67add716b869fb84dc77eec98cacd0cf3c34de2d47fd5c07cf69351682485"
+    "digest": "a17098bfe031de24f0b03b318ee7494aa7b484333bf410557d573ade96ddbc26"
   },
   "judge_receipt_count": 0,
   "maker": {
     "backend": "openai_responses_multi_agent",
-    "backend_status": "BLOCKED_QUOTA",
+    "backend_status": "READY_CANARY_VERIFIED",
+    "canary_digest": "e2722801a125d304de1cb18dcc4611acb92a5bddd61fe80846ff95a91890a75f",
+    "canary_ref": "OS-Machine-Mathematics/runtime/cutset/rh/provider-canary-latest.json",
     "max_concurrent_subagents": 64,
     "model": "gpt-5.6-sol",
     "policy_digest": "9f9982970df5df64bac62b8e45a8be7e68aa250e8e0a35abc7de890bfc3ab5b2",
@@ -41,7 +43,7 @@
     "killed_formulations": 30,
     "theorem_edges_used": 21
   },
-  "run_id": "cutset.run.89a67add716b869fb84d",
+  "run_id": "cutset.run.a17098bfe031de24f0b0",
   "schema": "cutset.public_campaign_run.v1",
   "state": "COMPILED",
   "terminal": null,
