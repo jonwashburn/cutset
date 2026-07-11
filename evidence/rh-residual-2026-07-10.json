@@ -1,0 +1,278 @@
+{
+  "schema": "cutset.residual_snapshot.v1",
+  "as_of": "2026-07-10",
+  "campaign": {
+    "id": "RH",
+    "title": "Riemann Hypothesis",
+    "status": "OPEN",
+    "box": "Riemann/rh_loop/RH_BOX.json",
+    "box_schema": "RH_BOX_v2",
+    "box_updated": "2026-07-09",
+    "graph_nodes": 40,
+    "graph_edges": 24,
+    "walls": 23
+  },
+  "provenance": {
+    "compiler": "Riemann/rh_loop/rh_box.py compose",
+    "command": "python3 Riemann/rh_loop/rh_box.py compose RH --json",
+    "compose_sha256": "254e0a6e1eabca05bea5d94f7a5c91d3438a0c9b01026a42392fe81c467dea67",
+    "visibility": "READ_ONLY_DOGFOOD",
+    "authority": "Compose reports registered residual only. Lake/CI alone may promote OPEN to THEOREM. This page never upgrades status."
+  },
+  "counts": {
+    "cut_set": 10,
+    "closes_goal": 5,
+    "hypothesis_support": 5,
+    "blocked_routes": 1,
+    "killed_formulations": 7
+  },
+  "compose": {
+    "goal": "RH",
+    "goal_status": "OPEN",
+    "cut_set": [
+      {
+        "residual_id": "CriticalStripZeroFreeBridge",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "CriticalStripZeroFreeBridge"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/StripZeroFreeRegion.lean"
+        },
+        "statement": "zeta nonzero on open critical strip",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "LedgerPointBalanceCoupling",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "LedgerPointBalanceCoupling"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann.lean"
+        },
+        "statement": "LedgerPointBalanceCoupling inhabited",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "RSPhysicalThesis",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "RSPhysicalThesis"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/RH_Certificate.lean"
+        },
+        "statement": "strip zeros are physical recognition events",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "WeilPositivityPG",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "WeilPositivityPG"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/WeilPositivity.lean",
+          "probe": null
+        },
+        "statement": "Weil positivity on PG tests",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "xiLedgerCost_zero",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "xiLedgerCost_zero"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/XiLedgerBalance.lean"
+        },
+        "statement": "xiLedgerCost = 0",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "L1_Po_positivity",
+        "path_status": "HYPOTHESIS",
+        "via": [
+          "RH",
+          "channel_square_to_RH",
+          "L2_coercivity",
+          "L1_Po_positivity"
+        ],
+        "honesty": "bridge not Lean-closed",
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/ThetaChannelMixed.lean",
+          "probe": "Riemann/rh_loop/channel_square_p12d_pr_split_results.json"
+        },
+        "statement": "OddCompletedThetaSquarePositivity (P_o PSD on odd v)",
+        "kind": "fragment"
+      },
+      {
+        "residual_id": "L1_cutoff_cauchy",
+        "path_status": "HYPOTHESIS",
+        "via": [
+          "RH",
+          "channel_square_to_RH",
+          "L2_coercivity",
+          "L1_Po_positivity",
+          "L1_cutoff_cauchy"
+        ],
+        "honesty": "bridge not Lean-closed",
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/ThetaChannelMixed.lean",
+          "probe": "Riemann/rh_loop/channel_square_p12f_l1_rewrite_results.json"
+        },
+        "statement": "OddThetaSWCutoffCauchyDomination (cutoff Cauchy on S/W)",
+        "kind": "fragment"
+      },
+      {
+        "residual_id": "L1_domination_rewrite",
+        "path_status": "HYPOTHESIS",
+        "via": [
+          "RH",
+          "channel_square_to_RH",
+          "L2_coercivity",
+          "L1_domination_rewrite"
+        ],
+        "honesty": "bridge not Lean-closed",
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/ThetaChannelMixed.lean",
+          "probe": "Riemann/rh_loop/channel_square_p12f_l1_rewrite_results.json"
+        },
+        "statement": "alias: prefer L1_cutoff_cauchy (Part 12f shape)",
+        "kind": "fragment"
+      },
+      {
+        "residual_id": "L2_coercivity",
+        "path_status": "HYPOTHESIS",
+        "via": [
+          "RH",
+          "channel_square_to_RH",
+          "L2_coercivity"
+        ],
+        "honesty": "bridge not Lean-closed",
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/ThetaChannelMixed.lean",
+          "probe": "Riemann/rh_loop/channel_square_p12d_nystrom_results.json",
+          "witness": "Riemann/rh_loop/channel_square_p12c_witness_vstar.json",
+          "constants": [
+            "anchorOddWitnessQA",
+            "anchorOddL2SharpDelta"
+          ]
+        },
+        "statement": "AnchorReflectionOddL2Coercivity / Sharp (delta = anchorOddL2SharpDelta)",
+        "kind": "fragment"
+      },
+      {
+        "residual_id": "completion_square_current",
+        "path_status": "HYPOTHESIS",
+        "via": [
+          "RH",
+          "channel_square_to_RH",
+          "completion_square_current"
+        ],
+        "honesty": "bridge not Lean-closed",
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/ChannelKModeClosedForm.lean"
+        },
+        "statement": "one-gap gate as positive integral op in t",
+        "kind": "fragment"
+      }
+    ],
+    "blocked_routes": [
+      {
+        "residual_id": "BoundaryTransportCert",
+        "path_status": "BLOCKED",
+        "via": [
+          "RH",
+          "BoundaryTransportCert"
+        ],
+        "honesty": null,
+        "blocked_reason": "supplying the cert = assuming RH",
+        "spawn": null,
+        "statement": "BoundaryTransportCert",
+        "kind": "certificate"
+      }
+    ],
+    "killed_formulations": [
+      {
+        "id": "BEZ_RHFreePositivityShortcut",
+        "killed_by": "W_bezoutiant_rhfree_positivity_shortcut",
+        "survivor": "BEZ_ID analytic identity only",
+        "effect": "exclude"
+      },
+      {
+        "id": "AnchorReflectionOddPositivity",
+        "killed_by": "W_p_odd_universal",
+        "survivor": "L2_coercivity",
+        "effect": "exclude"
+      },
+      {
+        "id": "AnchorConePositivity",
+        "killed_by": "W_anchor_cone",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "GramCompression",
+        "killed_by": "W_gram_compression",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "EuclidOddCoercivity",
+        "killed_by": "W_euclid_coercivity",
+        "survivor": "L2_coercivity",
+        "effect": "exclude"
+      },
+      {
+        "id": "TermwiseCrossPos",
+        "killed_by": "W_termwise_cross_pos",
+        "survivor": "L1_domination_rewrite",
+        "effect": "exclude"
+      },
+      {
+        "id": "WeightIndependentSquare",
+        "killed_by": "W_weight_independent_square",
+        "survivor": "",
+        "effect": "exclude"
+      }
+    ],
+    "theorem_edges_used": [
+      "BoundaryTransportCert->RH",
+      "CriticalStripZeroFreeBridge->RH",
+      "RSPhysicalThesis->RH",
+      "delta_iff_RH",
+      "weil_pg_iff_RH",
+      "xi_iff_RH"
+    ],
+    "hypothesis_bridges": [
+      "channel_square_to_RH"
+    ],
+    "notes": [
+      "Compose never upgrades status. Inhabiting a cut member is progress only after lake/gate.",
+      "HYPOTHESIS-path residuals (channel_square_to_RH) are live program bets, not Lean equivalences."
+    ]
+  }
+}

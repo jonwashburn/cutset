@@ -3,168 +3,311 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cutset | Compute what remains</title>
-<meta name="description" content="Cutset composes registered proofs, scoped walls, and open obligations into the current residual frontier of a mathematical campaign.">
+<title>Cutset | What remains</title>
+<meta name="description" content="Cutset computes the registered residual frontier of a mathematical campaign. RH dogfood: read-only compose over CERT_GRAPH.">
 <meta name="theme-color" content="#080a0e">
 <link rel="canonical" href="https://cutset.io/">
-<meta property="og:title" content="Cutset | Compute what remains">
-<meta property="og:description" content="The residual-frontier instrument inside OSMM.">
+<meta property="og:title" content="Cutset | What remains">
+<meta property="og:description" content="Read-only residual frontier for the RH campaign. Lake alone upgrades status.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cutset.io">
-<style id="c3">
-:root{--c3-bg:#080a0e;--c3-surface:#0d1118;--c3-raised:#111722;--c3-line:#222c3c;--c3-line2:#3a465a;--c3-ink:#f1f3f7;--c3-copy:#bbc4d3;--c3-muted:#818b9d;--c3-faint:#515d70;--c3-accent:#f16d64;--c3-accent2:#ffa297;--c3-proof:#54cf91;--c3-wall:#ef6b62;--c3-residual:#e9bb63;--c3-goal:#72a9ff;--mono:"SF Mono",SFMono-Regular,ui-monospace,Consolas,"Liberation Mono",monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;--serif:Georgia,"Times New Roman",serif}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}a{color:var(--c3-accent2);text-decoration:none}a:hover{text-decoration:underline}code{font-family:var(--mono)}::selection{background:rgba(241,109,100,.3);color:#fff}
-body{background:var(--c3-bg);color:var(--c3-ink);font:16px/1.6 var(--sans)}
-.c3-skip{position:fixed;left:16px;top:-80px;z-index:1000;background:var(--c3-ink);color:#05070a;padding:10px 14px;border-radius:6px}.c3-skip:focus{top:12px}
-a:focus-visible{outline:2px solid var(--c3-accent);outline-offset:4px}
-.c3-nav{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--c3-line);background:rgba(8,10,14,.9);backdrop-filter:blur(16px)}
-.c3-nav-inner{max-width:1120px;margin:auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between}
-.c3-brand{color:var(--c3-ink);font-size:19px;font-weight:780;letter-spacing:-.025em}.c3-brand i{color:var(--c3-accent);font-style:normal}.c3-brand:hover{text-decoration:none}
-.c3-links{display:flex;gap:24px;align-items:center;font-size:13px}.c3-links a{color:var(--c3-muted)}.c3-links a:hover{color:var(--c3-ink);text-decoration:none}.c3-links .parent{color:var(--c3-accent2)}
-.c3-wrap{max-width:1040px;margin:auto}.c3-narrow{max-width:780px;margin:auto}.c3-section{padding:90px 24px}
-.c3-kicker{margin-bottom:16px;color:var(--c3-accent);font:700 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase}
-.c3-section h2{margin:0 0 18px;color:var(--c3-ink);font-size:clamp(30px,4vw,44px);line-height:1.08;letter-spacing:-.035em}.c3-section h3{color:var(--c3-ink);font-size:18px}
-.c3-lead{max-width:64ch;color:var(--c3-copy);font-size:19px;line-height:1.65}
-.c3-hero{position:relative;overflow:hidden;padding:112px 24px 86px;border-bottom:1px solid var(--c3-line);background:radial-gradient(760px 430px at 50% -12%,rgba(241,109,100,.13),transparent 68%)}
-.c3-hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(241,109,100,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(241,109,100,.025) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at 50% 28%,black,transparent 70%)}
-.c3-hero-inner{position:relative;z-index:1;max-width:900px;margin:auto;text-align:center}
-.c3-eyebrow{display:inline-flex;gap:8px;align-items:center;margin-bottom:30px;border:1px solid var(--c3-line);border-radius:999px;padding:7px 15px;color:var(--c3-muted);font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}.c3-eyebrow b{color:var(--c3-accent2)}
-.c3-title{display:inline-block;position:relative;padding:0 40px}.c3-title:before,.c3-title:after{position:absolute;top:50%;transform:translateY(-54%);color:rgba(241,109,100,.25);font:200 clamp(65px,10vw,116px)/1 var(--mono)}.c3-title:before{content:"[";left:0}.c3-title:after{content:"]";right:0}
-.c3-hero h1{margin:0;color:var(--c3-ink);font-size:clamp(58px,9.5vw,108px);line-height:.92;letter-spacing:-.065em}.c3-hero h1 em{color:var(--c3-accent);font-style:normal}
-.c3-hero-copy{max-width:700px;margin:28px auto 0;color:var(--c3-copy);font-size:clamp(18px,2.2vw,22px);line-height:1.58}.c3-definition{max-width:650px;margin:18px auto 0;color:var(--c3-muted);font:13px/1.6 var(--mono)}
-.c3-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:34px}.c3-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:8px;font-weight:700;font-size:14px}.c3-btn:hover{text-decoration:none;transform:translateY(-1px)}.c3-btn.primary{background:var(--c3-accent);color:#1b0807}.c3-btn.secondary{border:1px solid var(--c3-line2);color:var(--c3-ink);background:rgba(13,17,24,.5)}
-.c3-ledger{background:var(--c3-surface);border-bottom:1px solid var(--c3-line)}.c3-ledger-intro{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:32px}.c3-ledger-intro p{max-width:500px;color:var(--c3-muted)}
-.c3-ledger-table{border:1px solid var(--c3-line);border-radius:12px;overflow:hidden}.c3-ledger-row{display:grid;grid-template-columns:1.45fr .55fr .8fr;border-bottom:1px solid var(--c3-line)}.c3-ledger-row:last-child{border-bottom:0}.c3-ledger-row>div{padding:15px 18px}.c3-ledger-row>div+div{border-left:1px solid var(--c3-line)}.c3-ledger-row.head{background:#0a0d12;color:var(--c3-faint);font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}.c3-ledger-row:not(.head)>div:first-child{color:var(--c3-copy)}.c3-state{display:inline-block;border:1px solid var(--c3-line2);border-radius:999px;padding:3px 9px;color:var(--c3-ink);font:700 10px var(--mono);letter-spacing:.08em}.c3-evidence{color:var(--c3-muted);font-size:13px}.c3-snapshot{margin-top:16px;font:12px var(--mono)}.c3-snapshot a{color:var(--c3-accent2)}
-.compiler{background:var(--c3-bg)}.compile-flow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:42px 0}.compile-card{position:relative;border:1px solid var(--c3-line);border-radius:10px;padding:23px;background:var(--c3-surface)}.compile-card:not(:last-child):after{content:"";position:absolute;right:-13px;top:50%;width:13px;border-top:1px solid var(--c3-line2)}.compile-card b{display:block;color:var(--c3-accent);font:700 10px var(--mono);letter-spacing:.12em}.compile-card strong{display:block;margin:8px 0;color:var(--c3-ink);font-size:17px}.compile-card p{color:var(--c3-muted);font-size:14px}
-.c3-graph{position:relative;border:1px solid var(--c3-line);border-radius:14px;padding:28px;background:var(--c3-raised);overflow:hidden}.c3-graph:before{content:"REGISTERED CERTIFICATE GRAPH";position:absolute;right:17px;top:14px;color:var(--c3-faint);font:700 9px var(--mono);letter-spacing:.12em}.c3-graph svg{width:100%;height:auto;display:block}.graph-legend{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:15px;color:var(--c3-muted);font:11px var(--mono)}.graph-legend span{display:flex;gap:7px;align-items:center}.graph-legend i{width:16px;height:2px}
-.relative-note{margin-top:20px;border-left:2px solid var(--c3-residual);padding:14px 18px;background:var(--c3-surface);color:var(--c3-copy)}.relative-note b{color:var(--c3-residual);font:700 10px var(--mono);letter-spacing:.08em}
-.laws{border-block:1px solid var(--c3-line);background:var(--c3-surface)}.law-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}.law-card{border:1px solid var(--c3-line);border-radius:12px;padding:28px;background:var(--c3-raised)}.law-card code{display:block;margin-bottom:13px;color:var(--c3-ink);font-size:20px;font-weight:800}.law-card p{color:var(--c3-muted)}.law-status{display:inline-block;margin-top:17px;border:1px solid var(--c3-line2);border-radius:999px;padding:3px 9px;color:var(--c3-copy);font:700 10px var(--mono);letter-spacing:.08em}
-.c3-parent{padding:78px 24px;text-align:center}.c3-parent-box{max-width:800px;margin:auto;border:1px solid var(--c3-line);border-radius:14px;padding:42px;background:linear-gradient(135deg,rgba(241,109,100,.04),rgba(240,187,78,.035))}.c3-parent-box p{max-width:620px;margin:0 auto;color:var(--c3-muted)}
-.c3-footer{border-top:1px solid var(--c3-line);padding:52px 24px 68px}.c3-footer-inner{max-width:1040px;margin:auto;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}.c3-footer p{color:var(--c3-faint);font-size:13px}.c3-footer a{color:var(--c3-muted)}
-@media(max-width:800px){.c3-ledger-intro{display:block}.c3-ledger-intro p{margin-top:12px}.compile-flow{grid-template-columns:1fr}.compile-card:not(:last-child):after{display:none}}
-@media(max-width:620px){.c3-links a:not(.parent){display:none}.c3-section{padding:70px 18px}.c3-hero{padding:84px 18px 66px}.c3-title{padding:0 24px}.c3-title:before,.c3-title:after{font-size:67px}.c3-hero h1{font-size:57px}.c3-hero-copy{font-size:18px}.c3-actions{flex-direction:column;align-items:center}.c3-btn{width:100%;max-width:280px}.c3-ledger-row{grid-template-columns:1fr}.c3-ledger-row.head{display:none}.c3-ledger-row>div+div{border-left:0;border-top:1px solid var(--c3-line);padding-top:10px;padding-bottom:10px}.c3-ledger-row>div:nth-child(2):before{content:"Implementation  ";color:var(--c3-faint);font:700 9px var(--mono);letter-spacing:.08em}.c3-ledger-row>div:nth-child(3):before{content:"Evidence  ";color:var(--c3-faint);font:700 9px var(--mono);letter-spacing:.08em}.law-grid{grid-template-columns:1fr}.c3-parent-box{padding:32px 22px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+<style>
+:root{
+  --bg:#080a0e; --surface:#0d1118; --raised:#111722; --line:#222c3c; --line2:#3a465a;
+  --ink:#f1f3f7; --copy:#bbc4d3; --muted:#818b9d; --faint:#515d70;
+  --accent:#f16d64; --accent2:#ffa297; --proof:#54cf91; --wall:#ef6b62;
+  --residual:#e9bb63; --goal:#72a9ff; --hyp:#c9a0ff;
+  --mono:"SF Mono",SFMono-Regular,ui-monospace,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans)}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+code{font-family:var(--mono);font-size:.92em}
+.nav{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);background:rgba(8,10,14,.92);backdrop-filter:blur(14px)}
+.nav-inner{max-width:1080px;margin:auto;padding:13px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{color:var(--ink);font-weight:780;font-size:19px;letter-spacing:-.03em}
+.brand i{color:var(--accent);font-style:normal}
+.brand:hover{text-decoration:none}
+.nav-links{display:flex;gap:18px;font-size:13px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.wrap{max-width:1080px;margin:auto;padding:0 22px}
+.hero{padding:72px 0 36px;border-bottom:1px solid var(--line);background:radial-gradient(700px 360px at 50% -20%,rgba(241,109,100,.12),transparent 70%)}
+.kicker{color:var(--accent);font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:clamp(34px,6vw,56px);line-height:1.02;letter-spacing:-.045em;margin:0 0 14px;max-width:16ch}
+.hero .dek{color:var(--copy);font-size:18px;max-width:54ch;margin-bottom:22px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.pill{border:1px solid var(--line2);border-radius:999px;padding:6px 12px;font:12px/1 var(--mono);color:var(--muted)}
+.pill b{color:var(--ink);font-weight:700}
+.pill.open{border-color:rgba(233,187,99,.45);color:var(--residual)}
+.pill.proof{border-color:rgba(84,207,145,.4);color:var(--proof)}
+.pill.wall{border-color:rgba(239,107,98,.4);color:var(--wall)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat .n{font:700 28px/1 var(--mono);letter-spacing:-.04em}
+.stat .l{margin-top:6px;color:var(--muted);font-size:12px}
+.stat.goal .n{color:var(--goal)}
+.stat.thm .n{color:var(--proof)}
+.stat.hyp .n{color:var(--hyp)}
+.stat.dead .n{color:var(--wall)}
+.section{padding:48px 0}
+.section h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.03em;margin:0 0 10px}
+.lead{color:var(--copy);max-width:62ch;margin-bottom:22px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab{appearance:none;border:1px solid var(--line2);background:transparent;color:var(--muted);border-radius:8px;padding:8px 12px;font:12px/1 var(--mono);cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--accent);color:var(--ink);background:rgba(241,109,100,.08)}
+.list{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card:hover{border-color:var(--line2)}
+.card-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.tag{font:700 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:6px;border:1px solid}
+.tag.thm{color:var(--proof);border-color:rgba(84,207,145,.35);background:rgba(84,207,145,.06)}
+.tag.hyp{color:var(--hyp);border-color:rgba(201,160,255,.35);background:rgba(201,160,255,.06)}
+.tag.block{color:var(--wall);border-color:rgba(239,107,98,.35);background:rgba(239,107,98,.06)}
+.tag.kill{color:var(--muted);border-color:var(--line2)}
+.id{font:650 15px/1.2 var(--mono);color:var(--ink)}
+.role{color:var(--muted);font-size:12px;margin-left:auto}
+.stmt{color:var(--copy);font-size:14px;margin:4px 0 8px}
+.via{font:12px/1.45 var(--mono);color:var(--faint);word-break:break-word}
+.meta{margin-top:8px;font:12px/1.4 var(--mono);color:var(--muted)}
+.scope{border:1px solid var(--line);border-left:4px solid var(--residual);background:var(--raised);border-radius:10px;padding:16px 18px;color:var(--copy);font-size:14px}
+.scope b{color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.foot{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.err{color:var(--wall);padding:20px;border:1px solid rgba(239,107,98,.35);border-radius:10px;background:rgba(239,107,98,.06)}
+@media (max-width:820px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid2{grid-template-columns:1fr}
+  .role{margin-left:0}
+}
 </style>
 </head>
 <body>
-<a class="c3-skip" href="#main">Skip to content</a>
-<nav class="c3-nav" aria-label="Primary">
-  <div class="c3-nav-inner">
-    <a class="c3-brand" href="/">Cutset<i>.</i></a>
-    <div class="c3-links">
-      <a href="#evidence">Evidence</a>
-      <a href="#compiler">Compiler</a>
-      <a href="https://github.com/jonwashburn/cutset">Site source ↗</a>
-      <a class="parent" href="https://osmm.ai">Part of OSMM ↗</a>
+<nav class="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="brand" href="/">Cutset<i>.</i></a>
+    <div class="nav-links">
+      <a href="#frontier">Frontier</a>
+      <a href="#scope">Scope</a>
+      <a href="evidence/rh-residual-latest.json">Snapshot JSON</a>
+      <a href="https://osmm.ai">OSMM</a>
     </div>
   </div>
 </nav>
 
-<main id="main">
-  <header class="c3-hero">
-    <div class="c3-hero-inner">
-      <div class="c3-eyebrow"><b>OSMM instrument</b><span>residual-frontier compiler</span></div>
-      <div class="c3-title"><h1>Compute what<br><em>remains.</em></h1></div>
-      <p class="c3-hero-copy">Cutset reads registered proofs, scoped walls, and open obligations as a certificate graph. It returns the current residual frontier: the leaves still blocking the goal in that registered state.</p>
-      <p class="c3-definition">The result is relative to the registry. Missing routes, false walls, or lost hypotheses produce a bad frontier.</p>
-      <div class="c3-actions">
-        <a class="c3-btn primary" href="#compiler">See the compiler</a>
-        <a class="c3-btn secondary" href="#evidence">Inspect evidence</a>
-      </div>
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Residual frontier instrument</div>
+    <h1>What remains.</h1>
+    <p class="dek">Cutset walks a registered certificate graph and returns the open leaves still blocking the goal. This page is the live RH dogfood: read-only compose, not a proof engine.</p>
+    <div class="pills" id="pills" aria-live="polite"></div>
+    <div class="stats" id="stats" aria-live="polite">
+      <div class="stat goal"><div class="n" id="n-cut">–</div><div class="l">open residuals</div></div>
+      <div class="stat thm"><div class="n" id="n-thm">–</div><div class="l">theorem-path closers</div></div>
+      <div class="stat hyp"><div class="n" id="n-hyp">–</div><div class="l">hypothesis supports</div></div>
+      <div class="stat dead"><div class="n" id="n-kill">–</div><div class="l">killed formulations</div></div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <section class="c3-section c3-ledger" id="evidence">
-    <div class="c3-wrap">
-      <div class="c3-ledger-intro">
-        <div><div class="c3-kicker">Public evidence ledger</div><h2>Working kernel. Private evidence.</h2></div>
-        <p>The instrument runs inside private RH and δ research carriers. The public registry and public verifier remain open work.</p>
+<main>
+  <section class="section" id="frontier">
+    <div class="wrap">
+      <div class="grid2">
+        <div>
+          <h2>RH residual frontier</h2>
+          <p class="lead">Each row is still OPEN in the registered box. A theorem-path closer would close RH if inhabited. Hypothesis rows are the live program bet; they do not close alone.</p>
+          <div class="toolbar" role="tablist" aria-label="Frontier filter">
+            <button class="tab" role="tab" aria-selected="true" data-filter="all">All</button>
+            <button class="tab" role="tab" aria-selected="false" data-filter="THEOREM">Theorem-path</button>
+            <button class="tab" role="tab" aria-selected="false" data-filter="HYPOTHESIS">Hypothesis</button>
+            <button class="tab" role="tab" aria-selected="false" data-filter="blocked">Blocked</button>
+            <button class="tab" role="tab" aria-selected="false" data-filter="killed">Killed</button>
+          </div>
+          <div class="list" id="list" aria-live="polite"></div>
+        </div>
+        <aside>
+          <div class="scope" id="scope">
+            <b>SCOPE</b><br>
+            Loading registered snapshot…
+          </div>
+          <div style="height:14px"></div>
+          <div class="card">
+            <div class="kicker" style="margin-bottom:10px">How to recompute</div>
+            <p class="stmt" style="margin:0">Internal compiler (private repo):</p>
+            <p class="via" style="margin-top:8px;color:var(--copy)">python3 Riemann/rh_loop/rh_box.py compose RH</p>
+            <p class="meta">Refresh this page’s JSON with<br><code>cutset-site/export_rh_snapshot.py</code></p>
+          </div>
+        </aside>
       </div>
-      <div class="c3-ledger-table" role="table" aria-label="Cutset capability evidence">
-        <div class="c3-ledger-row head" role="row"><div role="columnheader">Capability</div><div role="columnheader">Implementation</div><div role="columnheader">Evidence</div></div>
-        <div class="c3-ledger-row" role="row"><div role="cell">Certificate graph and compose surface</div><div role="cell"><span class="c3-state">RUNNING · PRIVATE</span></div><div class="c3-evidence" role="cell">Recorded internally</div></div>
-        <div class="c3-ledger-row" role="row"><div role="cell">RH and δ campaign adapters</div><div role="cell"><span class="c3-state">RUNNING · PRIVATE</span></div><div class="c3-evidence" role="cell">Recorded internally</div></div>
-        <div class="c3-ledger-row" role="row"><div role="cell">Signed events, replay, and bounded contracts</div><div role="cell"><span class="c3-state">RUNNING · ADVISORY</span></div><div class="c3-evidence" role="cell">128/128 internal test record</div></div>
-        <div class="c3-ledger-row" role="row"><div role="cell">Attempt-to-wall admission enforcement</div><div role="cell"><span class="c3-state">BUILDING</span></div><div class="c3-evidence" role="cell">No public verifier</div></div>
-        <div class="c3-ledger-row" role="row"><div role="cell">Canonical public event log and registry</div><div role="cell"><span class="c3-state">OPEN</span></div><div class="c3-evidence" role="cell">None claimed</div></div>
-      </div>
-      <div class="c3-snapshot"><a href="https://osmm.ai/evidence/snapshot-20260710.json">Read the shared dated evidence snapshot ↗</a></div>
-    </div>
-  </section>
-
-  <section class="c3-section compiler" id="compiler">
-    <div class="c3-wrap">
-      <div class="c3-kicker">The compiler</div>
-      <h2>A mathematical campaign in. A current residual out.</h2>
-      <p class="c3-lead">Cutset walks backward from a named goal through registered theorem-grade routes. It preserves hypotheses, excludes only formulations carrying admitted negative evidence, and emits the unresolved leaves with provenance.</p>
-
-      <div class="compile-flow">
-        <div class="compile-card"><b>INPUT</b><strong>Registered campaign</strong><p>Goal, proved routes, exact assumptions, open obligations, and scoped walls.</p></div>
-        <div class="compile-card"><b>COMPILE</b><strong>Certificate graph</strong><p>Traverse legal routes, retain provenance, and reject silent status upgrades.</p></div>
-        <div class="compile-card"><b>OUTPUT</b><strong>Residual frontier</strong><p>The open leaves still separating the registered state from the goal.</p></div>
-      </div>
-
-      <div class="c3-graph">
-        <svg viewBox="0 0 900 320" role="img" aria-label="Registered Cutset certificate graph">
-          <defs><marker id="c3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#54cf91"/></marker></defs>
-          <circle cx="70" cy="160" r="8" fill="#f1f3f7"/>
-          <text x="70" y="194" text-anchor="middle" fill="#818b9d" font-family="monospace" font-size="12">registry</text>
-          <path d="M80 160C200 60 300 70 420 120" fill="none" stroke="#54cf91" stroke-width="2.5" marker-end="url(#c3a)"/>
-          <path d="M80 160C200 260 310 250 420 200" fill="none" stroke="#54cf91" stroke-width="2.5" marker-end="url(#c3a)"/>
-          <path d="M80 160C220 140 305 92 375 72" fill="none" stroke="#ef6b62" stroke-width="2" stroke-dasharray="7 6"/>
-          <path d="M365 62l20 20m0-20l-20 20" stroke="#ef6b62" stroke-width="3"/>
-          <path d="M80 160C220 200 310 245 385 265" fill="none" stroke="#ef6b62" stroke-width="2" stroke-dasharray="7 6"/>
-          <path d="M375 255l20 20m0-20l-20 20" stroke="#ef6b62" stroke-width="3"/>
-          <path d="M470 90C535 115 535 205 470 230" fill="none" stroke="#e9bb63" stroke-width="2.5" stroke-dasharray="3 6" stroke-linecap="round"/>
-          <circle cx="470" cy="90" r="7" fill="#111722" stroke="#e9bb63" stroke-width="2.5"/><circle cx="505" cy="160" r="7" fill="#111722" stroke="#e9bb63" stroke-width="2.5"/><circle cx="470" cy="230" r="7" fill="#111722" stroke="#e9bb63" stroke-width="2.5"/>
-          <path d="M515 160h130" stroke="#3a465a" stroke-width="2" stroke-dasharray="5 6"/>
-          <circle cx="700" cy="160" r="35" fill="rgba(114,169,255,.07)" stroke="#72a9ff" stroke-width="2"/>
-          <text x="700" y="165" text-anchor="middle" fill="#72a9ff" font-family="monospace" font-size="13">GOAL</text>
-          <text x="505" y="292" text-anchor="middle" fill="#e9bb63" font-family="monospace" font-size="12">current residual frontier</text>
-        </svg>
-        <div class="graph-legend"><span><i style="background:var(--c3-proof)"></i>proved route</span><span><i style="background:var(--c3-wall)"></i>admitted wall</span><span><i style="background:var(--c3-residual)"></i>open residual</span><span><i style="background:var(--c3-goal)"></i>goal</span></div>
-      </div>
-      <div class="relative-note"><b>SCOPE</b><br>Cutset computes from registered state. It does not prove that the registry is complete, that a proposed wall is true, or that every mathematical route has been represented.</div>
-    </div>
-  </section>
-
-  <section class="c3-section laws" id="laws">
-    <div class="c3-narrow">
-      <div class="c3-kicker">The two non-upgrade laws</div>
-      <h2>The graph cannot award itself credit.</h2>
-      <p class="c3-lead">Cutset may organize evidence and propose work. Status moves require separate admission.</p>
-      <div class="law-grid">
-        <article class="law-card">
-          <code>OPEN ≠ THEOREM</code>
-          <h3>Only the checker promotes proof status.</h3>
-          <p>An agent, panel, graph path, or confident paragraph cannot make a theorem. The named deterministic gate decides.</p>
-          <span class="law-status">RUNNING · ADVISORY</span>
-        </article>
-        <article class="law-card">
-          <code>ATTEMPT ≠ WALL</code>
-          <h3>Failure to find is not evidence of exclusion.</h3>
-          <p>A timed-out search becomes a wall only after scoped negative evidence binds it to the exact formulation it excludes.</p>
-          <span class="law-status">BUILDING</span>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="c3-parent">
-    <div class="c3-parent-box">
-      <div class="c3-kicker">The larger system</div>
-      <h2>Cutset answers one question. OSMM runs the campaign.</h2>
-      <p>OSMM, the Operating System of Machine Mathematics, records typed state, carries results through the δ grammar, dispatches bounded work, and admits checker receipts. Cutset owns the residual frontier inside that loop.</p>
-      <div class="c3-actions"><a class="c3-btn primary" href="https://osmm.ai">Visit OSMM</a></div>
     </div>
   </section>
 </main>
 
-<footer class="c3-footer">
-  <div class="c3-footer-inner">
-    <div><a class="c3-brand" href="/">Cutset<i>.</i></a><p style="margin-top:9px">Compute what remains.</p></div>
-    <div><p>An instrument inside <a href="https://osmm.ai">OSMM</a>.</p><p><a href="https://github.com/jonwashburn/cutset">site source</a> · <a href="https://osmm.ai/evidence/snapshot-20260710.json">evidence snapshot</a></p></div>
+<footer class="foot">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;width:100%">
+    <div>
+      <a class="brand" href="/">Cutset<i>.</i></a>
+      <p style="margin-top:8px">Compute what remains. Never upgrade status.</p>
+    </div>
+    <div>
+      <p>Instrument inside <a href="https://osmm.ai">OSMM</a>.</p>
+      <p><a href="https://github.com/jonwashburn/cutset">site source</a> · RH stays <b style="color:var(--residual)">OPEN</b> until lake says otherwise.</p>
+    </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  const SNAPSHOT_URL = "evidence/rh-residual-latest.json";
+  let data = null;
+  let filter = "all";
+
+  const $ = (id) => document.getElementById(id);
+
+  function tagClass(path) {
+    if (path === "THEOREM") return "thm";
+    if (path === "HYPOTHESIS") return "hyp";
+    if (path === "BLOCKED") return "block";
+    return "kill";
+  }
+
+  function roleFor(r, goal) {
+    if (r.kind === "certificate" || r.kind === "bridge") {
+      return r.path_status === "THEOREM"
+        ? "CLOSES_GOAL if inhabited"
+        : "bridge residual";
+    }
+    return "SUPPORT (does not close " + goal + " alone)";
+  }
+
+  function renderPills(snap) {
+    const c = snap.campaign;
+    const p = snap.provenance;
+    $("pills").innerHTML = [
+      '<span class="pill open"><b>' + c.id + "</b> · " + c.status + "</span>",
+      '<span class="pill">' + c.graph_nodes + " nodes · " + c.graph_edges + " edges · " + c.walls + " walls</span>",
+      '<span class="pill proof">as_of ' + snap.as_of + "</span>",
+      '<span class="pill">' + p.visibility + "</span>",
+      '<span class="pill">sha256 ' + p.compose_sha256.slice(0, 12) + "…</span>",
+    ].join("");
+  }
+
+  function renderStats(snap) {
+    const n = snap.counts;
+    $("n-cut").textContent = n.cut_set;
+    $("n-thm").textContent = n.closes_goal;
+    $("n-hyp").textContent = n.hypothesis_support;
+    $("n-kill").textContent = n.killed_formulations;
+  }
+
+  function renderScope(snap) {
+    $("scope").innerHTML =
+      "<b>SCOPE</b><br>" +
+      snap.provenance.authority +
+      "<br><br><b>Campaign box</b> · <code>" +
+      snap.campaign.box +
+      "</code> · updated " +
+      (snap.campaign.box_updated || "unknown") +
+      "<br><b>Public write</b> · off. This is read-only dogfood, not a submission surface.";
+  }
+
+  function cardResidual(r, goal) {
+    const via = (r.via || []).slice().reverse().join(" ← ");
+    const spawn = r.spawn || {};
+    let meta = "";
+    if (r.honesty) meta += "honesty: " + r.honesty + "<br>";
+    if (spawn.lean_module) meta += "lean: " + spawn.lean_module + "<br>";
+    if (spawn.probe) meta += "probe: " + spawn.probe;
+    return (
+      '<article class="card">' +
+      '<div class="card-top">' +
+      '<span class="tag ' + tagClass(r.path_status) + '">' + r.path_status + "</span>" +
+      '<span class="id">' + r.residual_id + "</span>" +
+      '<span class="role">' + roleFor(r, goal) + "</span>" +
+      "</div>" +
+      (r.statement ? '<p class="stmt">' + r.statement + "</p>" : "") +
+      '<div class="via">via: ' + via + "</div>" +
+      (meta ? '<div class="meta">' + meta + "</div>" : "") +
+      "</article>"
+    );
+  }
+
+  function cardBlocked(r) {
+    return (
+      '<article class="card">' +
+      '<div class="card-top"><span class="tag block">BLOCKED</span><span class="id">' +
+      r.residual_id +
+      "</span></div>" +
+      '<p class="stmt">' +
+      (r.blocked_reason || "do not attack") +
+      "</p></article>"
+    );
+  }
+
+  function cardKilled(k) {
+    return (
+      '<article class="card">' +
+      '<div class="card-top"><span class="tag kill">KILLED</span><span class="id">' +
+      k.id +
+      "</span></div>" +
+      '<p class="stmt">killed_by ' +
+      (k.killed_by || "?") +
+      (k.survivor ? " → survivor " + k.survivor : "") +
+      "</p></article>"
+    );
+  }
+
+  function renderList() {
+    if (!data) return;
+    const goal = data.compose.goal;
+    const cut = data.compose.cut_set || [];
+    const blocked = data.compose.blocked_routes || [];
+    const killed = data.compose.killed_formulations || [];
+    let html = "";
+    if (filter === "all" || filter === "THEOREM" || filter === "HYPOTHESIS") {
+      const rows = cut.filter((r) => filter === "all" || r.path_status === filter);
+      html += rows.map((r) => cardResidual(r, goal)).join("");
+      if (!rows.length) html += '<p class="stmt">No residuals in this filter.</p>';
+    }
+    if (filter === "blocked") {
+      html += blocked.map(cardBlocked).join("") || '<p class="stmt">No blocked routes.</p>';
+    }
+    if (filter === "killed") {
+      html += killed.map(cardKilled).join("") || '<p class="stmt">No killed formulations.</p>';
+    }
+    $("list").innerHTML = html;
+  }
+
+  document.querySelectorAll(".tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filter = btn.getAttribute("data-filter");
+      document.querySelectorAll(".tab").forEach((b) => b.setAttribute("aria-selected", b === btn ? "true" : "false"));
+      renderList();
+    });
+  });
+
+  fetch(SNAPSHOT_URL)
+    .then((r) => {
+      if (!r.ok) throw new Error("snapshot HTTP " + r.status);
+      return r.json();
+    })
+    .then((snap) => {
+      data = snap;
+      renderPills(snap);
+      renderStats(snap);
+      renderScope(snap);
+      renderList();
+    })
+    .catch((err) => {
+      $("list").innerHTML = '<div class="err">Could not load residual snapshot: ' + err.message + "</div>";
+      $("scope").textContent = "Snapshot missing. Run export_rh_snapshot.py and deploy evidence/.";
+    });
+})();
+</script>
 </body>
 </html>
