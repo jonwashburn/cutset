@@ -1,0 +1,51 @@
+{
+  "audit_count": 0,
+  "authority": {
+    "model_output": "UNTRUSTED_ADVICE",
+    "public_write": false,
+    "theorem_authority": "Lean/lake + allowed-axiom audit + anti-cheat + anti-vacuity + signed reverse_mathlib admission"
+  },
+  "budget": {
+    "authorized": false,
+    "launch_legal": false,
+    "max_cost_usd": 500,
+    "max_wall_seconds": 32400
+  },
+  "campaign": "rh",
+  "candidate_receipts": [],
+  "formalization_status": null,
+  "goal": {
+    "id": "RH",
+    "source_digest": "3145f163384246a1614ac05b5086329df43ea6980bd3b37042221ed8e2d2ed0b",
+    "statement": "Prove Mathlib RiemannHypothesis unconditionally (axiom basis ⊆ {propext, Classical.choice, Quot.sound})."
+  },
+  "identity": {
+    "algorithm": "sha256",
+    "digest": "89a67add716b869fb84dc77eec98cacd0cf3c34de2d47fd5c07cf69351682485"
+  },
+  "judge_receipt_count": 0,
+  "maker": {
+    "backend": "openai_responses_multi_agent",
+    "backend_status": "BLOCKED_QUOTA",
+    "max_concurrent_subagents": 64,
+    "model": "gpt-5.6-sol",
+    "policy_digest": "9f9982970df5df64bac62b8e45a8be7e68aa250e8e0a35abc7de890bfc3ab5b2",
+    "policy_id": "rh.sol.cdc-structure.v1",
+    "prompt_digest": "ff94d6358799bf4fe9cf23408d7fa760220f48e269abbd4b0834a6eb4f797bed"
+  },
+  "non_upgrade": "This projection cannot change theorem status. Canonical state changes only through a signed reverse_mathlib admission receipt.",
+  "residual_counts": {
+    "blocked_routes": 2,
+    "cut_set": 30,
+    "hypothesis_bridges": 2,
+    "killed_formulations": 30,
+    "theorem_edges_used": 21
+  },
+  "run_id": "cutset.run.89a67add716b869fb84d",
+  "schema": "cutset.public_campaign_run.v1",
+  "state": "COMPILED",
+  "terminal": null,
+  "theorem_status": "OPEN",
+  "wall_count": 35,
+  "wall_digest": "f6d6c656ee8ab54fd9dbd0c8041ff88750394663b2110bb68764391b4be1ca04"
+}

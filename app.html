@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RH console · Cutset</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#080a0e">
+<style>
+:root{
+  --bg:#080a0e; --surface:#0d1118; --raised:#111722; --line:#222c3c; --line2:#3a465a;
+  --ink:#f1f3f7; --copy:#bbc4d3; --muted:#818b9d; --faint:#515d70;
+  --accent:#f16d64; --accent2:#ffa297; --proof:#54cf91; --wall:#ef6b62;
+  --residual:#e9bb63; --goal:#72a9ff; --hyp:#c9a0ff;
+  --mono:"SF Mono",SFMono-Regular,ui-monospace,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.9em}
+.nav{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(8,10,14,.94);backdrop-filter:blur(14px)}
+.nav-inner{max-width:1200px;margin:auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{color:var(--ink);font-weight:780;font-size:18px;letter-spacing:-.03em}
+.brand i{color:var(--accent);font-style:normal}
+.nav-right{display:flex;gap:14px;align-items:center;font-size:13px;color:var(--muted)}
+.nav-right button{appearance:none;border:1px solid var(--line2);background:transparent;color:var(--muted);border-radius:7px;padding:7px 10px;font:12px/1 var(--mono);cursor:pointer}
+.nav-right button:hover{color:var(--ink);border-color:var(--accent)}
+.wrap{max-width:1200px;margin:auto;padding:0 20px}
+.hero{padding:28px 0 18px;border-bottom:1px solid var(--line)}
+.kicker{color:var(--accent);font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.035em;margin-bottom:8px}
+.dek{color:var(--copy);max-width:62ch;margin-bottom:16px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.pill{border:1px solid var(--line2);border-radius:999px;padding:5px 11px;font:11px/1 var(--mono);color:var(--muted)}
+.pill b{color:var(--ink)}
+.pill.open{border-color:rgba(233,187,99,.45);color:var(--residual)}
+.stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.stat .n{font:700 24px/1 var(--mono);letter-spacing:-.04em}
+.stat .l{margin-top:5px;color:var(--muted);font-size:11px}
+.stat.goal .n{color:var(--goal)}.stat.thm .n{color:var(--proof)}.stat.hyp .n{color:var(--hyp)}
+.stat.wall .n{color:var(--wall)}.stat.block .n{color:var(--accent2)}.stat.sup .n{color:var(--residual)}
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px;padding:22px 0 48px}
+.side{position:sticky;top:64px;align-self:start}
+.side nav{display:flex;flex-direction:column;gap:4px}
+.side button{appearance:none;text-align:left;border:0;background:transparent;color:var(--muted);padding:9px 11px;border-radius:8px;font:13px/1.2 var(--sans);cursor:pointer}
+.side button[aria-selected="true"]{background:rgba(241,109,100,.1);color:var(--ink)}
+.side button:hover{color:var(--ink)}
+.panel{display:none}
+.panel.active{display:block}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+.search{flex:1;min-width:180px;background:#0a0e14;border:1px solid var(--line2);border-radius:8px;color:var(--ink);padding:9px 11px;font:13px/1.3 var(--sans)}
+.tab{appearance:none;border:1px solid var(--line2);background:transparent;color:var(--muted);border-radius:8px;padding:8px 11px;font:11px/1 var(--mono);cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--accent);color:var(--ink);background:rgba(241,109,100,.08)}
+.list{display:flex;flex-direction:column;gap:9px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 15px}
+.card:hover{border-color:var(--line2)}
+.card-top{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:6px}
+.tag{font:700 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:5px;border:1px solid}
+.tag.thm{color:var(--proof);border-color:rgba(84,207,145,.35);background:rgba(84,207,145,.06)}
+.tag.hyp{color:var(--hyp);border-color:rgba(201,160,255,.35);background:rgba(201,160,255,.06)}
+.tag.block{color:var(--wall);border-color:rgba(239,107,98,.35);background:rgba(239,107,98,.06)}
+.tag.kill{color:var(--muted);border-color:var(--line2)}
+.tag.open{color:var(--residual);border-color:rgba(233,187,99,.35)}
+.tag.sup{color:var(--goal);border-color:rgba(114,169,255,.35)}
+.id{font:650 14px/1.2 var(--mono);color:var(--ink)}
+.role{color:var(--muted);font-size:11px;margin-left:auto}
+.stmt{color:var(--copy);font-size:13px;margin:3px 0 7px}
+.via,.meta{font:11px/1.45 var(--mono);color:var(--faint);word-break:break-word}
+.meta{margin-top:6px;color:var(--muted)}
+.scope{border:1px solid var(--line);border-left:4px solid var(--residual);background:var(--raised);border-radius:10px;padding:13px 14px;color:var(--copy);font-size:13px;margin-bottom:14px}
+.scope b{color:var(--ink)}
+.empty{color:var(--muted);padding:18px 4px}
+.err{color:var(--wall);padding:16px;border:1px solid rgba(239,107,98,.35);border-radius:10px;background:rgba(239,107,98,.06)}
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .layout{grid-template-columns:1fr}
+  .side{position:static}
+  .side nav{flex-direction:row;flex-wrap:wrap;margin-bottom:8px}
+}
+</style>
+</head>
+<body>
+<script src="auth.js"></script>
+<script>if (!CutsetAuth.requireAuth("app.html")) { /* redirecting */ }</script>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="app.html">Cutset<i>.</i> <span style="font-weight:500;color:var(--muted);font-size:13px;margin-left:6px">RH console</span></a>
+    <div class="nav-right">
+      <span id="who"></span>
+      <a href="/" style="color:var(--muted)">Public page</a>
+      <button type="button" id="logout">Sign out</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Campaign console · single user · single problem</div>
+    <h1 id="title">Riemann Hypothesis</h1>
+    <p class="dek" id="dek">Loading registered campaign state…</p>
+    <div class="pills" id="pills"></div>
+    <div class="stats" id="stats">
+      <div class="stat goal"><div class="n" id="n-cut">–</div><div class="l">open residuals</div></div>
+      <div class="stat thm"><div class="n" id="n-thm">–</div><div class="l">theorem-path closers</div></div>
+      <div class="stat hyp"><div class="n" id="n-hyp">–</div><div class="l">hypothesis supports</div></div>
+      <div class="stat sup"><div class="n" id="n-sup">–</div><div class="l">open supports</div></div>
+      <div class="stat block"><div class="n" id="n-block">–</div><div class="l">blocked routes</div></div>
+      <div class="stat wall"><div class="n" id="n-kill">–</div><div class="l">killed / walls</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <aside class="side">
+    <nav aria-label="Console sections">
+      <button type="button" data-panel="frontier" aria-selected="true">Residual frontier</button>
+      <button type="button" data-panel="blocked">Blocked routes</button>
+      <button type="button" data-panel="walls">Wall bank</button>
+      <button type="button" data-panel="killed">Killed formulations</button>
+      <button type="button" data-panel="graph">Graph roster</button>
+      <button type="button" data-panel="scope">Scope & provenance</button>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="panel active" id="panel-frontier">
+      <div class="scope" id="frontier-scope"></div>
+      <div class="toolbar">
+        <input class="search" id="q-frontier" placeholder="Filter residuals…" aria-label="Filter residuals">
+        <button class="tab" data-filter="all" aria-selected="true">All</button>
+        <button class="tab" data-filter="THEOREM" aria-selected="false">Theorem-path</button>
+        <button class="tab" data-filter="HYPOTHESIS" aria-selected="false">Hypothesis</button>
+        <button class="tab" data-filter="OPEN_SUPPORT" aria-selected="false">Open support</button>
+      </div>
+      <div class="list" id="list-frontier"></div>
+    </section>
+
+    <section class="panel" id="panel-blocked">
+      <div class="scope"><b>BLOCKED</b><br>Routes that close the goal only by presupposing it. Do not attack these as doors.</div>
+      <div class="list" id="list-blocked"></div>
+    </section>
+
+    <section class="panel" id="panel-walls">
+      <div class="scope"><b>WALL BANK</b><br>Failed formulations with extracted constraints. Negative knowledge is first-class product content.</div>
+      <div class="toolbar"><input class="search" id="q-walls" placeholder="Filter walls…" aria-label="Filter walls"></div>
+      <div class="list" id="list-walls"></div>
+    </section>
+
+    <section class="panel" id="panel-killed">
+      <div class="scope"><b>KILLED</b><br>Formulations subtracted from the cut-set. Survivors are the live residuals that inherit the constraint.</div>
+      <div class="list" id="list-killed"></div>
+    </section>
+
+    <section class="panel" id="panel-graph">
+      <div class="scope"><b>GRAPH ROSTER</b><br>All registered CERT_GRAPH nodes. Status is registered state, not a live lake probe.</div>
+      <div class="toolbar">
+        <input class="search" id="q-graph" placeholder="Filter nodes…" aria-label="Filter nodes">
+        <button class="tab gtab" data-gfilter="all" aria-selected="true">All</button>
+        <button class="tab gtab" data-gfilter="OPEN" aria-selected="false">Open</button>
+        <button class="tab gtab" data-gfilter="THEOREM" aria-selected="false">Theorem</button>
+        <button class="tab gtab" data-gfilter="KILLED" aria-selected="false">Killed</button>
+        <button class="tab gtab" data-gfilter="CONDITIONAL" aria-selected="false">Conditional</button>
+      </div>
+      <div class="list" id="list-graph"></div>
+    </section>
+
+    <section class="panel" id="panel-scope">
+      <div class="list" id="list-scope"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  const SNAPSHOT_URL = "evidence/rh-residual-latest.json";
+  let data = null;
+  let frontierFilter = "all";
+  let graphFilter = "all";
+
+  const $ = (id) => document.getElementById(id);
+  document.getElementById("who").textContent = CutsetAuth.readSession().user;
+  document.getElementById("logout").onclick = () => CutsetAuth.logout();
+
+  document.querySelectorAll(".side button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".side button").forEach((b) => b.setAttribute("aria-selected", b === btn ? "true" : "false"));
+      document.querySelectorAll(".panel").forEach((p) => p.classList.remove("active"));
+      document.getElementById("panel-" + btn.dataset.panel).classList.add("active");
+    });
+  });
+
+  function tagClass(s) {
+    if (s === "THEOREM") return "thm";
+    if (s === "HYPOTHESIS") return "hyp";
+    if (s === "BLOCKED") return "block";
+    if (s === "KILLED") return "kill";
+    if (s === "OPEN_SUPPORT") return "sup";
+    return "open";
+  }
+
+  function roleFor(r, goal) {
+    if (r.kind === "certificate" || r.kind === "bridge") {
+      return r.path_status === "THEOREM" ? "CLOSES_GOAL if inhabited" : "bridge / closer residual";
+    }
+    return "SUPPORT (does not close " + goal + " alone)";
+  }
+
+  function cardResidual(r, goal) {
+    const via = (r.via || []).slice().reverse().join(" ← ");
+    const spawn = r.spawn || {};
+    let meta = "";
+    if (r.honesty) meta += "honesty: " + r.honesty + "<br>";
+    if (spawn.lean_module) meta += "lean: " + spawn.lean_module + "<br>";
+    if (spawn.probe) meta += "probe: " + spawn.probe;
+    return (
+      '<article class="card"><div class="card-top">' +
+      '<span class="tag ' + tagClass(r.path_status) + '">' + r.path_status + "</span>" +
+      '<span class="id">' + r.residual_id + "</span>" +
+      '<span class="role">' + roleFor(r, goal) + "</span></div>" +
+      (r.statement ? '<p class="stmt">' + esc(r.statement) + "</p>" : "") +
+      '<div class="via">via: ' + esc(via) + "</div>" +
+      (meta ? '<div class="meta">' + meta + "</div>" : "") +
+      "</article>"
+    );
+  }
+
+  function esc(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function renderFrontier() {
+    const goal = data.compose.goal;
+    const q = ($("q-frontier").value || "").toLowerCase();
+    const rows = (data.compose.cut_set || []).filter((r) => {
+      if (frontierFilter !== "all" && r.path_status !== frontierFilter) return false;
+      if (!q) return true;
+      const hay = [r.residual_id, r.statement, r.honesty, (r.via || []).join(" ")].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+    $("list-frontier").innerHTML = rows.map((r) => cardResidual(r, goal)).join("") || '<p class="empty">No residuals in this filter.</p>';
+  }
+
+  function renderBlocked() {
+    const rows = data.compose.blocked_routes || [];
+    $("list-blocked").innerHTML =
+      rows
+        .map(
+          (r) =>
+            '<article class="card"><div class="card-top"><span class="tag block">BLOCKED</span><span class="id">' +
+            esc(r.residual_id) +
+            '</span></div><p class="stmt">' +
+            esc(r.blocked_reason || "do not attack") +
+            "</p></article>"
+        )
+        .join("") || '<p class="empty">No blocked routes.</p>';
+  }
+
+  function renderWalls() {
+    const q = ($("q-walls").value || "").toLowerCase();
+    const rows = (data.walls || []).filter((w) => {
+      if (!q) return true;
+      return [w.id, w.kills, w.constraint, w.survivor, w.evidence].join(" ").toLowerCase().includes(q);
+    });
+    $("list-walls").innerHTML =
+      rows
+        .map(
+          (w) =>
+            '<article class="card"><div class="card-top"><span class="tag kill">WALL</span><span class="id">' +
+            esc(w.id) +
+            "</span></div>" +
+            '<p class="stmt"><b>kills</b> · ' +
+            esc(w.kills) +
+            "</p>" +
+            '<p class="stmt"><b>constraint</b> · ' +
+            esc(w.constraint) +
+            "</p>" +
+            (w.survivor ? '<div class="meta">survivor: ' + esc(w.survivor) + "</div>" : "") +
+            (w.evidence ? '<div class="meta">evidence: ' + esc(w.evidence) + "</div>" : "") +
+            "</article>"
+        )
+        .join("") || '<p class="empty">No walls in snapshot.</p>';
+  }
+
+  function renderKilled() {
+    const rows = data.compose.killed_formulations || [];
+    $("list-killed").innerHTML =
+      rows
+        .map(
+          (k) =>
+            '<article class="card"><div class="card-top"><span class="tag kill">KILLED</span><span class="id">' +
+            esc(k.id) +
+            '</span></div><p class="stmt">killed_by ' +
+            esc(k.killed_by || "?") +
+            (k.survivor ? " → survivor " + esc(k.survivor) : "") +
+            "</p></article>"
+        )
+        .join("") || '<p class="empty">No killed formulations.</p>';
+  }
+
+  function renderGraph() {
+    const q = ($("q-graph").value || "").toLowerCase();
+    const rows = (data.nodes || []).filter((n) => {
+      if (graphFilter !== "all") {
+        const st = (n.status || "").toUpperCase();
+        if (graphFilter === "OPEN" && !(st === "OPEN" || st.startsWith("OPEN") || st === "HYPOTHESIS" || st === "CONDITIONAL" || st.includes("PARTIAL"))) {
+          if (st !== "OPEN" && st !== "HYPOTHESIS" && !st.startsWith("CONDITIONAL") && st !== "PARTIAL" && !st.includes("CLOSED-RELATIVE") && st !== "CLOSED") {
+            /* fall through */
+          }
+        }
+        if (graphFilter === "OPEN" && st !== "OPEN" && st !== "HYPOTHESIS" && !String(n.status).includes("CONDITIONAL") && st !== "PARTIAL") return false;
+        if (graphFilter === "THEOREM" && st !== "THEOREM" && st !== "CLOSED" && !String(n.status).startsWith("CLOSED")) return false;
+        if (graphFilter === "KILLED" && st !== "KILLED") return false;
+        if (graphFilter === "CONDITIONAL" && !String(n.status).toUpperCase().includes("CONDITIONAL") && st !== "PARTIAL" && !String(n.status).includes("CLOSED-RELATIVE")) return false;
+      }
+      if (!q) return true;
+      return [n.id, n.kind, n.status, n.statement, n.lean].join(" ").toLowerCase().includes(q);
+    });
+    $("list-graph").innerHTML =
+      rows
+        .map(
+          (n) =>
+            '<article class="card"><div class="card-top"><span class="tag ' +
+            tagClass(n.status === "KILLED" ? "KILLED" : n.status === "THEOREM" || n.status === "CLOSED" ? "THEOREM" : "OPEN") +
+            '">' +
+            esc(n.status) +
+            '</span><span class="tag">' +
+            esc(n.kind) +
+            '</span><span class="id">' +
+            esc(n.id) +
+            "</span></div>" +
+            (n.statement ? '<p class="stmt">' + esc(n.statement) + "</p>" : "") +
+            '<div class="meta">' +
+            (n.lean ? "lean: " + esc(n.lean) + "<br>" : "") +
+            (n.closes_goal ? "closes_goal<br>" : "") +
+            (n.killed_by ? "killed_by " + esc(n.killed_by) + "<br>" : "") +
+            (n.survivor ? "survivor " + esc(n.survivor) : "") +
+            "</div></article>"
+        )
+        .join("") || '<p class="empty">No nodes in this filter.</p>';
+  }
+
+  function renderScope() {
+    const p = data.provenance;
+    const c = data.campaign;
+    $("list-scope").innerHTML =
+      '<article class="card"><div class="card-top"><span class="tag open">AUTHORITY</span></div><p class="stmt">' +
+      esc(p.authority) +
+      '</p></article>' +
+      '<article class="card"><div class="card-top"><span class="tag">CAMPAIGN</span></div><p class="stmt">' +
+      esc(c.title) +
+      " · " +
+      esc(c.status) +
+      '</p><div class="meta">box: ' +
+      esc(c.box) +
+      "<br>updated: " +
+      esc(c.box_updated) +
+      "<br>nodes/edges/walls: " +
+      c.graph_nodes +
+      " / " +
+      c.graph_edges +
+      " / " +
+      c.walls +
+      "</div></article>" +
+      '<article class="card"><div class="card-top"><span class="tag">PROVENANCE</span></div><div class="meta">as_of ' +
+      esc(data.as_of) +
+      "<br>visibility: " +
+      esc(p.visibility) +
+      "<br>compiler: " +
+      esc(p.compiler) +
+      "<br>compose_sha256: " +
+      esc(p.compose_sha256) +
+      "<br>command: " +
+      esc(p.command) +
+      "</div></article>" +
+      '<article class="card"><div class="card-top"><span class="tag">PRODUCT</span></div><p class="stmt">Single-user dogfood console. No write path. Status upgrades never happen here.</p></article>';
+  }
+
+  function renderAll() {
+    const c = data.campaign;
+    const n = data.counts;
+    const cut = data.compose.cut_set || [];
+    const openSup = cut.filter((r) => r.path_status === "OPEN_SUPPORT").length;
+    $("title").textContent = c.title;
+    $("dek").textContent =
+      "Registered residual frontier for campaign " +
+      c.id +
+      ". Inhabit a theorem-path closer to close the goal after lake admits it. This console never upgrades status.";
+    $("pills").innerHTML = [
+      '<span class="pill open"><b>' + c.id + "</b> · " + c.status + "</span>",
+      '<span class="pill">' + c.graph_nodes + " nodes · " + c.graph_edges + " edges · " + c.walls + " walls</span>",
+      '<span class="pill">as_of ' + data.as_of + "</span>",
+      '<span class="pill">sha ' + data.provenance.compose_sha256.slice(0, 12) + "…</span>",
+    ].join("");
+    $("n-cut").textContent = n.cut_set;
+    $("n-thm").textContent = n.closes_goal;
+    $("n-hyp").textContent = n.hypothesis_support;
+    $("n-sup").textContent = openSup;
+    $("n-block").textContent = n.blocked_routes;
+    $("n-kill").textContent = n.killed_formulations + " / " + (n.walls || (data.walls || []).length);
+    $("frontier-scope").innerHTML =
+      "<b>HOW TO READ</b><br>Theorem-path = Lean-backed door. Hypothesis = live program bet. Open support = fragment on a live lane (e.g. causal polarization). Blocked = presupposes the goal.";
+    renderFrontier();
+    renderBlocked();
+    renderWalls();
+    renderKilled();
+    renderGraph();
+    renderScope();
+  }
+
+  document.querySelectorAll("#panel-frontier .tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      frontierFilter = btn.dataset.filter;
+      document.querySelectorAll("#panel-frontier .tab").forEach((b) => b.setAttribute("aria-selected", b === btn ? "true" : "false"));
+      renderFrontier();
+    });
+  });
+  document.querySelectorAll(".gtab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      graphFilter = btn.dataset.gfilter;
+      document.querySelectorAll(".gtab").forEach((b) => b.setAttribute("aria-selected", b === btn ? "true" : "false"));
+      renderGraph();
+    });
+  });
+  $("q-frontier").addEventListener("input", renderFrontier);
+  $("q-walls").addEventListener("input", renderWalls);
+  $("q-graph").addEventListener("input", renderGraph);
+
+  fetch(SNAPSHOT_URL)
+    .then((r) => {
+      if (!r.ok) throw new Error("snapshot HTTP " + r.status);
+      return r.json();
+    })
+    .then((snap) => {
+      data = snap;
+      renderAll();
+    })
+    .catch((err) => {
+      $("dek").textContent = "Could not load campaign snapshot.";
+      $("list-frontier").innerHTML = '<div class="err">' + esc(err.message) + "</div>";
+    });
+})();
+</script>
+</body>
+</html>

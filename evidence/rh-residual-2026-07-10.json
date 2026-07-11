@@ -24,7 +24,8 @@
     "closes_goal": 19,
     "hypothesis_support": 7,
     "blocked_routes": 2,
-    "killed_formulations": 30
+    "killed_formulations": 30,
+    "walls": 35
   },
   "compose": {
     "goal": "RH",
@@ -744,5 +745,1124 @@
       "Compose never upgrades status. Inhabiting a cut member is progress only after lake/gate.",
       "HYPOTHESIS-path residuals (channel_square_to_RH) are live program bets, not Lean equivalences."
     ]
-  }
+  },
+  "walls": [
+    {
+      "id": "W_termwise_pg",
+      "kills": "term-by-term positivity of prime-side Weil/PG",
+      "constraint": "positivity must come from structure (grouping/symmetry), not termwise",
+      "survivor": "",
+      "evidence": "pg_pole_pair_negative_example (PGRealAssembly.lean)"
+    },
+    {
+      "id": "W_boundary_transport_as_door",
+      "kills": "treating BoundaryTransportCert as soft attack surface",
+      "constraint": "supplying the cert = assuming RH",
+      "survivor": "",
+      "evidence": "boundaryTransportCert_iff_rh_core"
+    },
+    {
+      "id": "W_zero_side_metric",
+      "kills": "zero-side RecognitionMetric construction as primary",
+      "constraint": "only surviving HP route is prime-side Weil transport",
+      "survivor": "",
+      "evidence": "RecognitionMetricRigidity (off-line zero ⇒ no metric)"
+    },
+    {
+      "id": "W_zero_composition_witness",
+      "kills": "ZeroCompositionWitness as primary attack",
+      "constraint": "contradicts WitnessedDefectSensor.in_strip",
+      "survivor": "",
+      "evidence": "RHAttackSurfaceChoice"
+    },
+    {
+      "id": "W_defect_annular_bounded",
+      "kills": "EulerInstantiation.defect_annular_cost_bounded",
+      "constraint": "deprecated; do not cite",
+      "survivor": "",
+      "evidence": "inconsistent with proved unbounded annular cost"
+    },
+    {
+      "id": "W_weight_independent_square",
+      "kills": "weight-independent channel-space square",
+      "constraint": "A_ν must carry m^{-1/2} INSIDE the squares; work at exact u*",
+      "survivor": "",
+      "evidence": "Parts 5–7 measured; eps family diagonal congruence; decoys non-PSD"
+    },
+    {
+      "id": "W_finite_band_repair",
+      "kills": "finite |m−n| band repair of indefinite channel diagonals",
+      "constraint": "needs FULL tower; mixed direct-dual basis absorbs log(mn) exactly (THEOREM)",
+      "survivor": "",
+      "evidence": "Part 6/7"
+    },
+    {
+      "id": "W_flat_mechanism",
+      "kills": "near-flat weight direction as second PSD ray / curved rescue",
+      "constraint": "flat = Euler direction + visibility collapse; weight space finished",
+      "survivor": "",
+      "evidence": "Part 7"
+    },
+    {
+      "id": "W_row_only_target",
+      "kills": "pole-row-only target inequality",
+      "constraint": "use ANCHOR form, not row alone",
+      "survivor": "",
+      "evidence": "Part 8 measured false at mode 1 (−1.3e-3); Part 9 corrects to anchor = row+col−diag"
+    },
+    {
+      "id": "W_additive_psd_split",
+      "kills": "additive PSD+PSD split of K along anchor/tower (or O(1e-3) regroupings)",
+      "constraint": "every certificate piece must annihilate touching bundle; live in K rank-~7 Gram range",
+      "survivor": "",
+      "evidence": "Part 9: A=−T on touching bundle (13/21 kernel eigs ~0)"
+    },
+    {
+      "id": "W_anchor_cone",
+      "kills": "AnchorConePositivity / scalar S-lemma sym(A)+λ sym(D)≥0",
+      "constraint": "no ledger-block grouping is the certificate; u nearly in ker K",
+      "survivor": "",
+      "evidence": "Part 10: cone-interior u with u^T A u = −2.58e-3, σ=u^T D u=−0.110"
+    },
+    {
+      "id": "W_gram_compression",
+      "kills": "additive Gram compression K=PAP+PTP as sum of two positive pieces",
+      "constraint": "Gram split dead; parity grading survives (even-negativity of A, odd-negativity of T)",
+      "survivor": "",
+      "evidence": "Part 11 plan + probe"
+    },
+    {
+      "id": "W_p_odd_universal",
+      "kills": "AnchorReflectionOddPositivity as stated (all reflection-closed sections, all odd v)",
+      "constraint": "A_odd = PSD up to tiny near-null defect; reformulate with explicit finite defect in L2",
+      "survivor": "L2_coercivity",
+      "evidence": "Part 12c: q(c,d) indefinite; witness v* with c=d=0, Q_A=−4.345e-8 multi-instrument"
+    },
+    {
+      "id": "W_euclid_coercivity",
+      "kills": "Euclidean AnchorReflectionOddCoercivity / AnchorReflectionOddDefectBound δ as contentful relaxation",
+      "constraint": "exists-δ Euclidean form ≡ falsified positivity; only L2 normalization survives",
+      "survivor": "",
+      "evidence": "Part 12d THEOREM anchorReflectionOddDefectBound_collapse + iff_positivity; R_eucl ~ 1/h (slope −1.01)"
+    },
+    {
+      "id": "W_cd_boundary_delta",
+      "kills": "(c,d) boundary-residue route to closed-form δ",
+      "constraint": "defect is bulk/spectral; δ = −λ_min of odd kernel, not a boundary functional",
+      "survivor": "",
+      "evidence": "Part 12d stratum: c=d=0 retains 98.4% of bottom mode"
+    },
+    {
+      "id": "W_termwise_cross_pos",
+      "kills": "termwise cross≥0 in S/W square-completion of P",
+      "constraint": "L1 must be a domination / single-square rewrite, not termwise cross positivity",
+      "survivor": "",
+      "evidence": "Part 12e CROSS_DOMINATED: min_cross −0.186; cross/square ≈ −0.99; Q_P still ≥0"
+    },
+    {
+      "id": "W_seed_A_B",
+      "kills": "Seed A diagonal accretivity; Seed B |F_f(0)|² as SOS summand",
+      "constraint": "no termwise SOS; positivity in W-bulk / current-coordinate recombination",
+      "survivor": "",
+      "evidence": "2026-07-07 measured"
+    },
+    {
+      "id": "W_ncd_as_door",
+      "kills": "Negative-Cone Domination as independent door",
+      "constraint": "restatement, not a door",
+      "survivor": "",
+      "evidence": "de Bruijn flow: NCD ⟺ cone empty ⟺ the gate"
+    },
+    {
+      "id": "W_pointwise_mixed_pencil",
+      "kills": "pointwise mixed-pencil positivity M_σ ⪰ 0 for every window",
+      "constraint": "do not chase pointwise M_σ",
+      "survivor": "",
+      "evidence": "false for every window incl. Gaussian"
+    },
+    {
+      "id": "W_historical_proof_claims",
+      "kills": "treating Christmas/active/July-7 papers as closed RH",
+      "constraint": "archive only; revalidate before citing as live",
+      "survivor": "",
+      "evidence": "RH_Program_Memorial + RH_BOX status OPEN"
+    },
+    {
+      "id": "W_literal_single_square_odd",
+      "kills": "literal single rewritten square of Q_P on the odd sector (F(0)^2 as the square)",
+      "constraint": "L1 positivity on odd data is the defect pairing ∫RF (or the Part-12f cutoff Cauchy domination of the S/W form), never a residual F(0)^2 square",
+      "survivor": "L1_cutoff_cauchy / OddThetaSWCutoffCauchyDomination",
+      "evidence": "THEOREM bphi_quadForm_eq_defect_pairing_of_reflectionOdd: on reflection-odd finite sections Q_P = 2∫RF with F(0)=0; the only square in the boundary-square rewrite vanishes. MEASURED DERIV_REWRITE_EXACT + R_NONPOS; SR pointwise indefinite."
+    },
+    {
+      "id": "p12f_rhfree_direct_domination",
+      "kills": "OddThetaSWCutoffCauchyDomination provable RH-free by exact identity/spectral symbol",
+      "constraint": "Any RH-free positivity certificate on the odd channel would be insensitive to planted strip quartets; the form measurably detects them. The complex zero expansion itself consumes no zero-realness. Zero-realness first enters only when that expansion is converted to nonnegative squares. Parity selection is the routing constraint: the odd sector is blind to purely imaginary frequency zeros, so their exclusion is a separate node.",
+      "survivor": "(a) Abel-primary Lean RH-free identity (I) greenlit 2026-07-09 salvage panel (leaf zero: xiFrequency_rapid_decay); truncation/RL demoted. (b') LIVE BET: analytic-c logT/T calibration at verified zeros (M1=∫|v|; height convention; c-grid SEAD DEAD). Kernel floor -2.1e-12 comparison requires position-space M1 from same instrument.",
+      "evidence": "BEZ gate (identity (I) 1e-7 + SOS-over-40-zeros + parity selection: odd fold detects off-axis quartets, exact rank-8 witness -6.3e6) + P12F-FLIP (detection survives full background on translate class; near-line b=0.05 at a=60 detected all eps in [0,8]) + panel judge DISGUISE (rh_"
+    },
+    {
+      "id": "W_bezoutiant_rhfree_positivity_shortcut",
+      "kills": "Composing Xi real-zero Hermite-Bezout positivity into BEZ_OddImagePositivity and presenting the result as an RH-free path",
+      "constraint": "Identity (I) is RH-free. Pairing nonnegativity is a separate sign node and may not inherit an RH-free tag from any theorem whose premise is zero-realness.",
+      "survivor": "BEZ_ID analytic identity; T2a remains a relocation test with no dependency edge into the RH graph",
+      "evidence": "XiRealZeroHermiteBezoutPositivity explicitly consumes XiZeroRealness. BEZ_OddImagePositivity is RH-EQUIVALENT-GRADE on the parity-scoped odd image."
+    },
+    {
+      "id": "W_selberg_trace_indefinite",
+      "kills": "candidate C9-family variant building the causal ambient square from the Selberg trace formula",
+      "constraint": "the ambient carrier must not import a trace formula whose geometric side has sign-indefinite orbital integrals",
+      "survivor": "C9_PoleAnnihilatedTateSquare",
+      "evidence": "PANEL (rh_weil_causal_polarization 2026-07-10): indefinite hyperbolic orbital integrals in the Selberg trace formula can be negative, contradicting unconditional positivity"
+    },
+    {
+      "id": "W_vasyunin_gram_is_weil",
+      "kills": "recovering the causal square by Carleman + Cholesky on the Vasyunin Gram matrix (candidate C15)",
+      "constraint": "H and C must be defined before and independently of B; a construction whose data is the Weil form fails the independence gate",
+      "survivor": "C9_PoleAnnihilatedTateSquare",
+      "evidence": "PANEL: Vasyunin Gram entries ARE the Weil form; Carleman+Cholesky reconstructs a measure for an already-assumed form (epsilon-perturbation counterexample)"
+    },
+    {
+      "id": "W_measure_moments_are_weil",
+      "kills": "positivity from a measure whose moments equal the prime-side Guinand-Weil sums (candidate C7)",
+      "constraint": "same independence gate; the operator/space may not be defined from B or from the prime-side Weil sums",
+      "survivor": "C9_PoleAnnihilatedTateSquare",
+      "evidence": "PANEL: the measure's moments are the prime-side Guinand-Weil sums, which are precisely the Weil functional"
+    },
+    {
+      "id": "W_debranges_flow_crossing",
+      "kills": "de Branges downward-flow / MML / FTB / ATC / germ-jet barrier / r-statistic route to RH (memorial sections 11-13)",
+      "constraint": "no flow/barrier argument whose master PDE admits a crossing heat solution; banked survivors are the master identity, the Lambda-instrument (disproof only), and Sigma integrality",
+      "survivor": "weilPGCausalPolarization",
+      "evidence": "PANEL (rh_unconditional_closing 2026-07-10): exact heat-solution countermodel F_t(z)=z^2-2(t-tau) satisfies the master PDE + anchors yet crosses; corner-germ sign wrong for any barrier; rigidity counterexample; closed 3-0"
+    },
+    {
+      "id": "W_koszul_absorbed",
+      "kills": "the Koszul-supertrace route treated as an independent door to RH",
+      "constraint": "do not open Koszul as a separate lane; its content is the same archimedean boundary step as weilPGCausalPolarization",
+      "survivor": "weilPGCausalPolarization",
+      "evidence": "PANEL: its faithful supertrace content collapses onto the archimedean-completion/boundary problem of the causal square (Koszul <= causal-square completion); absorbed, not independent"
+    },
+    {
+      "id": "W_primitive_cycle_trace_half",
+      "kills": "raw primitive-cycle positive trace at s=1/2 as stated",
+      "constraint": "any trace/string positivity must regularize the divergent prime-power sum before claiming a positive continuation at s=1/2",
+      "survivor": "C14_deBrangesKreinString",
+      "evidence": "PANEL: Sum_p log p / sqrt(p) = infinity; no positive-trace continuation exists as stated"
+    },
+    {
+      "id": "W_lax_phillips_weight0_member",
+      "kills": "identifying the RH causal contraction as the weight-0 Lax-Phillips scattering member (Theta = Moebius o modular S)",
+      "constraint": "inherit the Lax-Phillips framework, never the modular object; member-hunting over automorphic covers is closed",
+      "survivor": "weilPGCausalPolarization (defect/explicit-formula identity close)",
+      "evidence": "MEASURED+PANEL: 1/2-shift blocks inheritance; M3' width fingerprint shows d_n irregular (cv 35%) and correlated with nearest zero gap; Sz.-Nagy-Foias makes the characteristic function a complete invariant"
+    },
+    {
+      "id": "W_odd_bezoutiant_mollifier_schur",
+      "kills": "odd-Bezoutiant mollifier Schur-complement rung as a positivity rung",
+      "constraint": "a positivity rung may not depend on BEZ_OddImagePositivity; only the identity-tier content survives",
+      "survivor": "BEZ_ID analytic identity (identity-tier only)",
+      "evidence": "PANEL (moving_anchor_rung 2026-07-10): routes through BEZ_OddImagePositivity, which RH_BOX registers RH-EQUIVALENT-GRADE (judge constraint violation)"
+    },
+    {
+      "id": "W_moving_anchor_scalar_measure_landau",
+      "kills": "moving-anchor scalar pole-subtracted positive measure nu_h >= 0",
+      "constraint": "scalar pole subtraction cannot yield a nonnegative measure below the anchor; positivity must be carried at kernel/exterior-square level",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+      "evidence": "PANEL: Landau's theorem + certified rho_1 pole at Re=1/2-h forces a negative part (explicit negative density near x0=log(3/2) at h=1/8, U^8=40960/59049<1)"
+    },
+    {
+      "id": "W_moving_anchor_crossratio_loewner",
+      "kills": "moving-anchor four-point cross-ratio FE-pair Pick matrix",
+      "constraint": "any rung congruent to the Loewner matrix of -Xi'/Xi is dead; escape requires domain growth beyond that class",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+      "evidence": "PANEL: Re phi==0 on the line collapses it to the Loewner matrix of -Xi'/Xi (registered congruence kill); boundary anchors require angular derivatives = Li jets"
+    },
+    {
+      "id": "W_moving_anchor_fitted_mollifier",
+      "kills": "frequency-axis det-identity rung (digamma-stripped odd Loewner, sinc^2 mollifier)",
+      "constraint": "no fitted coefficient on any verdict path; its identity-first spirit survives only as the IDENTITY_ONLY tier",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2 (IDENTITY_ONLY tier)",
+      "evidence": "PANEL: mollifier width is a fitted coefficient (immutable-judge violation); order-h^4 jet mismatch; raw Loewner of -A'/A sits in the Bezoutiant congruence class"
+    },
+    {
+      "id": "W_moving_anchor_pure_xy6",
+      "kills": "moving-anchor old pure (X-Y)^2 n=6 divisibility criterion",
+      "constraint": "the n=6 tripwire must use the exterior-square W_23 target (M17^2*(X-Y)^2 + DG*(X^2+Y^2)), not the bare (X-Y)^2 gate",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+      "evidence": "PANEL: exact falsifier D_{Gamma,h}>0 by strict Cauchy-Schwarz for the positive Gamma/Beta density; the authoritative target is W_23"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "RH",
+      "kind": "goal",
+      "status": "OPEN",
+      "statement": "Mathlib RiemannHypothesis",
+      "lean": "Mathlib.NumberTheory.LSeries.RiemannZeta.RiemannHypothesis",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "WeilPositivityPG",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "Weil positivity on PG tests",
+      "lean": "weilPositivityPG",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "xiLedgerCost_zero",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "xiLedgerCost = 0",
+      "lean": "xiLedgerCost_eq_zero_iff_riemannHypothesis (inhabit zero)",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "LedgerPointBalanceCoupling",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "LedgerPointBalanceCoupling inhabited",
+      "lean": "LedgerPointBalanceCoupling",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "CriticalStripZeroFreeBridge",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "zeta nonzero on open critical strip",
+      "lean": "CriticalStripZeroFreeBridge",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "RSPhysicalThesis",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "strip zeros are physical recognition events",
+      "lean": "RSPhysicalThesis",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BoundaryTransportCert",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "BoundaryTransportCert",
+      "lean": "BoundaryTransportCert",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "L2_coercivity",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "AnchorReflectionOddL2Coercivity / Sharp (delta = anchorOddL2SharpDelta)",
+      "lean": "AnchorReflectionOddL2CoercivitySharp",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "L1_cutoff_cauchy",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "OddThetaSWCutoffCauchyDomination (cutoff Cauchy on S/W)",
+      "lean": "OddThetaSWCutoffCauchyDomination",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T0_BezoutiantWellPosed",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Absolute integrability and measurability of the diagonal-extended Bezoutiant pairing on every exact odd sine image",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BEZ_XiNormalization",
+      "kind": "fragment",
+      "status": "CLOSED",
+      "statement": "The real cosine transform A(w) equals xiLine(w)/2 with the repository Fourier convention",
+      "lean": "xiFrequency_eq_xiLine_half",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BEZ_FourierConvolution",
+      "kind": "fragment",
+      "status": "CLOSED",
+      "statement": "The sine transform formula for S is CLOSED pointwise; the cosine transform formula for t*S+W remains OPEN.",
+      "lean": "open_sField_eq_sine_transform_ae / open_currentField_eq_cos_transform_ae (both proved)",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BEZ_AbelFubini",
+      "kind": "fragment",
+      "status": "CLOSED",
+      "statement": "For eta>0, all product-integral swaps are absolutely integrable and the Abel Laplace kernel yields the regularized Bezoutiant identity",
+      "lean": "open_regularized_fubini_identity (proved)",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BEZ_AbelLimits",
+      "kind": "fragment",
+      "status": "CLOSED-RELATIVE",
+      "statement": "As eta decreases to zero, the regularized Q_P and antisymmetrized Bezoutiant pairing converge to their ordinary Lebesgue limits",
+      "lean": "regularized_qP_tendsto / regularized_bezoutiant_tendsto",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BEZ_ID",
+      "kind": "fragment",
+      "status": "CONDITIONAL",
+      "statement": "Q_P(v)=(1/(4*pi^2))*<g,Bez(A,A')g> on the exact odd compact-support class",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BEZ_OddImagePositivity",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "The Bezoutiant pairing is nonnegative on every sine amplitude arising from an exact odd test",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T1a_EntireClassHermiteBezout",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Generic genus-one entire-class Hermite-Bezout zero expansion with absolute convergence, multiplicities, and removable zero quotients",
+      "lean": "EntireClassHermiteBezoutTheorem",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T1b_XiGenusOneEntireRealization",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "thetaXi=xiLine/2 inhabits the sharp genus-one class",
+      "lean": "XiGenusOneEntireRealization",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T1c_XiRealZeroHermiteBezoutPositivity",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "The zero expansion becomes a nonnegative real pairing when all frequency zeros are real",
+      "lean": "XiRealZeroHermiteBezoutPositivity",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T1d_RealRestrictionTransport",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Transport the complex entire-function Bezoutiant expansion to the real diagonal-extended kernel with the exact normalization",
+      "lean": "XiRealRestrictionTransport",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T1e_SeriesPairingExchange",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Justify exchanging the multiplicity-weighted zero series with the double pairing integral",
+      "lean": "XiSeriesPairingExchange",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "BEZ_RHFreePositivityShortcut",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "Use real-zero Hermite-Bezout positivity to certify BEZ_OddImagePositivity as an RH-free ancestor",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_bezoutiant_rhfree_positivity_shortcut",
+      "survivor": "BEZ_ID analytic identity only"
+    },
+    {
+      "id": "T2a_OddSineTestClassSufficiency",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Positivity on the exact odd sine image forces realness for xiLine zeros with nonzero real frequency",
+      "lean": "OddSineTestClassSufficiency",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T2b_XiNoPureImaginaryFrequencyZeros",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Independent exclusion of purely imaginary xiLine frequency zeros",
+      "lean": "XiNoPureImaginaryFrequencyZeros",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "T3_OddLimitToSectionTransfer",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Weakly convergent odd densities on a common compact approximate finite reflection-odd atomic sections and transport the B_Phi quadratic form",
+      "lean": "OddLimitToSectionTransfer",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "L1_Po_positivity",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "OddCompletedThetaSquarePositivity (P_o PSD on odd v)",
+      "lean": "OddCompletedThetaSquarePositivity",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "L1_domination_rewrite",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "alias: prefer L1_cutoff_cauchy (Part 12f shape)",
+      "lean": "OddThetaSWCutoffCauchyDomination",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "completion_square_current",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "one-gap gate as positive integral op in t",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "channel_square_to_RH",
+      "kind": "bridge",
+      "status": "OPEN",
+      "statement": "L2 odd-anchor coercivity + remaining channel-square arrows close B_Phi PSD hence RH",
+      "lean": "",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "AnchorReflectionOddPositivity",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_p_odd_universal",
+      "survivor": "L2_coercivity"
+    },
+    {
+      "id": "AnchorConePositivity",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_anchor_cone",
+      "survivor": ""
+    },
+    {
+      "id": "GramCompression",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_gram_compression",
+      "survivor": ""
+    },
+    {
+      "id": "EuclidOddCoercivity",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_euclid_coercivity",
+      "survivor": "L2_coercivity"
+    },
+    {
+      "id": "TermwiseCrossPos",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_termwise_cross_pos",
+      "survivor": "L1_domination_rewrite"
+    },
+    {
+      "id": "WeightIndependentSquare",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_weight_independent_square",
+      "survivor": ""
+    },
+    {
+      "id": "square_completion_identity",
+      "kind": "lemma",
+      "status": "THEOREM",
+      "statement": "anchorLedger_eq_squareCompletion",
+      "lean": "anchorLedger_eq_squareCompletion",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "weil_pg_iff_RH",
+      "kind": "lemma",
+      "status": "THEOREM",
+      "statement": "weilPositivityPG_iff_riemannHypothesis",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "xi_iff_RH",
+      "kind": "lemma",
+      "status": "THEOREM",
+      "statement": "xiLedgerCost_eq_zero_iff_riemannHypothesis",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "delta_iff_RH",
+      "kind": "lemma",
+      "status": "THEOREM",
+      "statement": "riemannHypothesis_iff_ledgerPointBalanceCoupling",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "prime_particle_iff_RH",
+      "kind": "lemma",
+      "status": "THEOREM",
+      "statement": "realExcitationSpectrum_iff_riemannHypothesis",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "WeilPositivityPGDialed",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "Weil positivity restricted to the dialed killing family: for all XiNonzeroZero rho0 and t>0, 0 <= Re(weilFunctional (pgTest (killPoly rho0) (dialCenter rho0 t) t)). Strictly thinner than WeilPositivityPG; the proved conv",
+      "lean": "hypothesis of riemannHypothesis_of_weilPositivityPGDialed (inline Prop, not yet named)",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "dialed_converse_to_RH",
+      "kind": "lemma",
+      "status": "THEOREM",
+      "statement": "riemannHypothesis_of_weilPositivityPGDialed: dialed-family PG Weil positivity implies RiemannHypothesis. Axiom basis [propext, Classical.choice, Quot.sound]; build receipt 2026-07-10.",
+      "lean": "riemannHypothesis_of_weilPositivityPGDialed",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "weilPGCausalPolarization",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Committed missing lemma: explicit Hilbert space H and complex-linear C_{u,t} built only from FE/(co-)Poisson transport, Lambda(n)>=0, Stirling, Vasyunin inner products, BC rewrites (no RH-equivalent input) with B_{u,t}(Q",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "C9_PoleAnnihilatedTateSquare",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Greenlit C9 formulation of the causal square: C^J_{u,t} = T_{u,t} o mult(m_d) with m_d the target-independent minimal polynomial of the boundary-germ spectral operator A_d; B(m_d Q, m_d R) = <T(m_d Q), T(m_d R)> exactly ",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "C1_SigmaEventCountIntegrality",
+      "kind": "formulation",
+      "status": "OPEN",
+      "statement": "Live bet: RH as vanishing of an integer (Grothendieck residue of an arithmetic differential form), established by magnitude not sign. Unrefuted despite a specific Fredholm kill.",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "C14_deBrangesKreinString",
+      "kind": "formulation",
+      "status": "OPEN",
+      "statement": "Live bet: prime-side de Branges-Krein string with Lambda(n)/sqrt(n) >= 0 as string mass; de Branges inverse-uniqueness forces Xi in HB. Must survive circularity audit (does inverse-uniqueness consume HB of the output?).",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "RealPGPrimeSideNonnegative",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "real PG prime-side functional nonnegative",
+      "lean": "RealPGPrimeSideNonnegative",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "ConcreteXiHerglotzOnRightHalfStrip",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "concrete xi Herglotz property on the right half strip",
+      "lean": "ConcreteXiHerglotzOnRightHalfStrip",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "GeneratedPrimeLogReciprocalNeutrality",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "generated prime-log reciprocal neutrality",
+      "lean": "GeneratedPrimeLogReciprocalNeutrality",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "GeneratedPrimeLogReflectionCollapse",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "generated prime-log reflection collapse",
+      "lean": "GeneratedPrimeLogReflectionCollapse",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "WitnessedHonestPhaseAdmissibilityBridge",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "witnessed honest-phase admissibility bridge",
+      "lean": "WitnessedHonestPhaseAdmissibilityBridge",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "NonzeroZetaPhaseCompositionBridge",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "nonzero zeta phase composition bridge (inhabit Nonempty)",
+      "lean": "VectorCFromHonestPhase.NonzeroZetaPhaseCompositionBridge",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "ObstructionDefectFree",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "obstruction theory defect-free",
+      "lean": "ObstructionDefectFree",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "NoFinitePrimeObstruction",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "no finite prime obstruction",
+      "lean": "NoFinitePrimeObstruction",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "ForcedLedgerRealization",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "forced ledger realization (inhabit Nonempty)",
+      "lean": "ForcedLedgerRealization",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "SpectralJBalanced",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "spectral J-balance",
+      "lean": "SpectralJBalanced",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "HilbertPolyaRealization",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "Hilbert-Polya realization",
+      "lean": "Realization (inhabit Nonempty Realization)",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "DiagonalRealization",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "diagonal Hilbert-Polya realization",
+      "lean": "DiagonalRealization (inhabit Nonempty)",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "PrimeAxisDefectOperatorZero",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "prime-axis defect operator vanishes",
+      "lean": "defectOperator_eq_zero_iff_riemannHypothesis",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "WeilPositivityGaussian",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "Weil positivity on the Gaussian test class (classic WeilPositivity def). The implication to RH is itself an OPEN Prop target (target_riemannHypothesis_of_weilPositivity), unlike the proved PG converse.",
+      "lean": "WeilPositivity",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "RecognitionMetricCert",
+      "kind": "certificate",
+      "status": "OPEN",
+      "statement": "Nonempty RecognitionMetric iff RH. Blocked as attack: RecognitionMetricRigidity shows an off-line zero forbids the metric, so supplying it presupposes the conclusion.",
+      "lean": "RecognitionMetric (inhabit Nonempty)",
+      "closes_goal": true,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "SelbergTraceCausalSquare",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "C8: causal ambient square from the Selberg trace formula (sign-indefinite orbital integrals)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_selberg_trace_indefinite",
+      "survivor": "C9_PoleAnnihilatedTateSquare"
+    },
+    {
+      "id": "VasyuninGramCarleman",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "C15: Carleman + Cholesky on the Vasyunin Gram matrix (entries ARE the Weil form)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_vasyunin_gram_is_weil",
+      "survivor": "C9_PoleAnnihilatedTateSquare"
+    },
+    {
+      "id": "MeasureMomentTateSquare",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "C7: measure whose moments equal the prime-side Guinand-Weil sums (independence gate)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_measure_moments_are_weil",
+      "survivor": "C9_PoleAnnihilatedTateSquare"
+    },
+    {
+      "id": "DeBrangesHeatFlowGate",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "de Branges flow / MML / FTB / ATC / germ-jet barriers / r-statistic (heat countermodel crosses)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_debranges_flow_crossing",
+      "survivor": "weilPGCausalPolarization"
+    },
+    {
+      "id": "LaxPhillipsWeight0Member",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "weight-0 Lax-Phillips scattering member identification (1/2-shift blocks inheritance)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_lax_phillips_weight0_member",
+      "survivor": "weilPGCausalPolarization"
+    },
+    {
+      "id": "OddBezoutiantMollifierSchur",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "odd-Bezoutiant mollifier Schur rung as positivity rung (routes through RH-equivalent-grade prop)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_odd_bezoutiant_mollifier_schur",
+      "survivor": ""
+    },
+    {
+      "id": "MovingAnchorScalarMeasure",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "moving-anchor scalar pole-subtracted positive measure (Landau forces negative part)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_moving_anchor_scalar_measure_landau",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2"
+    },
+    {
+      "id": "MovingAnchorCrossRatioPick",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "moving-anchor four-point cross-ratio Pick matrix (collapses to Loewner of -Xi'/Xi)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_moving_anchor_crossratio_loewner",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2"
+    },
+    {
+      "id": "MovingAnchorPureXY6",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "old pure (X-Y)^2 n=6 divisibility criterion (exact falsifier D_{Gamma,h} > 0)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_moving_anchor_pure_xy6",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2"
+    },
+    {
+      "id": "MovingAnchorFreqDetIdentityRung",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "frequency-axis det-identity rung (fitted mollifier width; immutable-judge violation)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_moving_anchor_fitted_mollifier",
+      "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2"
+    },
+    {
+      "id": "RHFreeDirectDomination",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "prove OddThetaSWCutoffCauchyDomination RH-free (DISGUISE: form detects planted quartets)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "p12f_rhfree_direct_domination",
+      "survivor": "BEZ_ID"
+    },
+    {
+      "id": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "Pole-crossing Schur rung v2: Theta_h(s)=xi(s-h)/xi(s+h) at h=1/8, anchor 1+h, aperture 9/16, positivity carried only at kernel level as the exterior-square Schur complement C_h(s,t). Gate currently emits IDENTITY_ONLY (S",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "TermwisePGPositivity",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "term-by-term positivity of the prime-side Weil/PG functional",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_termwise_pg",
+      "survivor": "WeilPositivityPG"
+    },
+    {
+      "id": "ZeroCompositionWitness",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "ZeroCompositionWitness as primary attack surface (contradicts WitnessedDefectSensor.in_strip)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_zero_composition_witness",
+      "survivor": ""
+    },
+    {
+      "id": "DefectAnnularCostBounded",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "EulerInstantiation.defect_annular_cost_bounded (deprecated; contradicts proved unbounded annular cost)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_defect_annular_bounded",
+      "survivor": ""
+    },
+    {
+      "id": "FiniteBandRepair",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "finite |m-n| band repair of indefinite channel diagonals (needs full tower)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_finite_band_repair",
+      "survivor": ""
+    },
+    {
+      "id": "FlatWeightMechanism",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "near-flat weight direction as second PSD ray / curved rescue (weight space finished)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_flat_mechanism",
+      "survivor": ""
+    },
+    {
+      "id": "RowOnlyTarget",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "pole-row-only target inequality (measured false at mode 1; use anchor = row+col-diag)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_row_only_target",
+      "survivor": ""
+    },
+    {
+      "id": "AdditivePSDSplit",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "additive PSD+PSD split of K along anchor/tower (A=-T on touching bundle)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_additive_psd_split",
+      "survivor": ""
+    },
+    {
+      "id": "CDBoundaryDelta",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "(c,d) boundary-residue route to a closed-form delta (c=d=0 retains 98.4% of bottom mode)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_cd_boundary_delta",
+      "survivor": "L2_coercivity"
+    },
+    {
+      "id": "SeedABDiagonalSOS",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "Seed A diagonal accretivity; Seed B |F_f(0)|^2 as SOS summand (no termwise SOS)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_seed_A_B",
+      "survivor": "completion_square_current"
+    },
+    {
+      "id": "NCDAsDoor",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "Negative-Cone Domination as an independent door (restatement of the gate, not a door)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_ncd_as_door",
+      "survivor": ""
+    },
+    {
+      "id": "PointwiseMixedPencil",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "pointwise mixed-pencil positivity M_sigma >= 0 for every window (false for every window)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_pointwise_mixed_pencil",
+      "survivor": ""
+    },
+    {
+      "id": "LiteralSingleSquareOdd",
+      "kind": "formulation",
+      "status": "KILLED",
+      "statement": "literal single rewritten square of Q_P on the odd sector (boundary square vanishes on odd)",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "W_literal_single_square_odd",
+      "survivor": "L1_cutoff_cauchy"
+    },
+    {
+      "id": "BPhi_PSD",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "B_Phi positive semidefiniteness: the live-front chain routes through this unnamed step between L2 coercivity and the channel-square bridge.",
+      "lean": "",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    },
+    {
+      "id": "DeltaRiemannCriticalStripCert",
+      "kind": "fragment",
+      "status": "OPEN",
+      "statement": "DeltaRiemannCriticalStripCert: delta-framework critical-strip certificate supporting the ledger point-balance coupling.",
+      "lean": "DeltaRiemannCriticalStripCert",
+      "closes_goal": false,
+      "killed_by": "",
+      "survivor": ""
+    }
+  ]
 }

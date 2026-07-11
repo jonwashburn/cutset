@@ -77,11 +77,25 @@ code{font-family:var(--mono);font-size:.92em}
 .scope{border:1px solid var(--line);border-left:4px solid var(--residual);background:var(--raised);border-radius:10px;padding:16px 18px;color:var(--copy);font-size:14px}
 .scope b{color:var(--ink)}
 .grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.machine{border-top:1px solid var(--line);background:var(--surface)}
+.machine-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+.pipeline{display:grid;gap:8px;margin-top:18px}
+.stage{display:grid;grid-template-columns:112px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:13px 14px;background:var(--bg)}
+.stage b{font:700 11px/1 var(--mono);letter-spacing:.08em;color:var(--muted)}
+.stage span{color:var(--copy);font-size:14px}
+.stage .state{font:700 10px/1 var(--mono);letter-spacing:.07em;color:var(--faint)}
+.stage.active{border-color:rgba(233,187,99,.55);box-shadow:inset 3px 0 var(--residual)}
+.stage.active b,.stage.active .state{color:var(--residual)}
+.machine-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.fact{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--bg)}
+.fact .value{font:700 20px/1.15 var(--mono);color:var(--ink);word-break:break-word}
+.fact .label{margin-top:6px;color:var(--muted);font-size:11px}
+.receipt{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--raised);font:11px/1.55 var(--mono);color:var(--muted);word-break:break-all}
 .foot{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .err{color:var(--wall);padding:20px;border:1px solid rgba(239,107,98,.35);border-radius:10px;background:rgba(239,107,98,.06)}
 @media (max-width:820px){
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .grid2{grid-template-columns:1fr}
+  .grid2,.machine-grid{grid-template-columns:1fr}
   .role{margin-left:0}
 }
 @media (max-width:620px){
@@ -99,9 +113,11 @@ code{font-family:var(--mono);font-size:.92em}
     <a class="brand" href="/">Cutset<i>.</i></a>
     <div class="nav-links">
       <a href="#frontier">Frontier</a>
+      <a href="#machine">Machine</a>
       <a href="#scope">Scope</a>
       <a href="evidence/rh-residual-latest.json">Snapshot JSON</a>
       <a href="https://osmm.ai">OSMM</a>
+      <a href="login.html" style="color:var(--accent2)">Sign in</a>
     </div>
   </div>
 </nav>
@@ -153,6 +169,36 @@ code{font-family:var(--mono);font-size:.92em}
       </div>
     </div>
   </section>
+
+  <section class="section machine" id="machine">
+    <div class="wrap">
+      <div class="kicker">Private RH dogfood · public sealed projection</div>
+      <h2>The attack machine is compiled.</h2>
+      <p class="lead">Cutset now turns the current residual, scoped walls, and proof policy into one content-addressed finite run. The model fleet is a replaceable maker. It cannot write the ledger or declare a theorem.</p>
+      <div class="machine-grid">
+        <div>
+          <div class="pipeline" aria-label="Cutset solver pipeline">
+            <div class="stage active" data-stage="COMPILED"><b>COMPILE</b><span>Freeze goal, residual, walls, policy, budget, and authority.</span><i class="state">CURRENT</i></div>
+            <div class="stage" data-stage="SEARCHING"><b>SEARCH</b><span>Run an independent multi-agent portfolio under a finite contract.</span><i class="state">BLOCKED</i></div>
+            <div class="stage" data-stage="AUDITING"><b>AUDIT</b><span>Attack candidates for circularity, hidden premises, and false positivity.</span><i class="state">WAITING</i></div>
+            <div class="stage" data-stage="FORMALIZING"><b>FORMALIZE</b><span>Extract the smallest surviving lemma into an isolated Lean contract.</span><i class="state">WAITING</i></div>
+            <div class="stage" data-stage="JUDGING"><b>JUDGE</b><span>Lake, axiom audit, anti-cheat, anti-vacuity, signed admission.</span><i class="state">WAITING</i></div>
+            <div class="stage" data-stage="ADMITTED"><b>RECOMPOSE</b><span>Only an admitted receipt can change canonical state.</span><i class="state">WAITING</i></div>
+          </div>
+        </div>
+        <aside>
+          <div class="machine-facts" id="machine-facts" aria-live="polite">
+            <div class="fact"><div class="value">–</div><div class="label">RUN STATE</div></div>
+            <div class="fact"><div class="value">–</div><div class="label">MAKER BACKEND</div></div>
+            <div class="fact"><div class="value">–</div><div class="label">CONCURRENT AGENTS</div></div>
+            <div class="fact"><div class="value">OPEN</div><div class="label">RH STATUS</div></div>
+          </div>
+          <div class="receipt" id="machine-receipt">Loading sealed campaign-run receipt…</div>
+          <p class="meta" style="margin-top:10px"><a href="evidence/rh-solver-run-latest.json">Inspect sanitized run JSON ↗</a>. Prompt text, candidate proofs, keys, and private audit evidence are not published.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="foot">
@@ -171,6 +217,7 @@ code{font-family:var(--mono);font-size:.92em}
 <script>
 (function () {
   const SNAPSHOT_URL = "evidence/rh-residual-latest.json";
+  const RUN_URL = "evidence/rh-solver-run-latest.json";
   let data = null;
   let filter = "all";
 
@@ -313,6 +360,35 @@ code{font-family:var(--mono);font-size:.92em}
     .catch((err) => {
       $("list").innerHTML = '<div class="err">Could not load residual snapshot: ' + err.message + "</div>";
       $("scope").textContent = "Snapshot missing. Run export_rh_snapshot.py and deploy evidence/.";
+    });
+
+  fetch(RUN_URL)
+    .then((r) => {
+      if (!r.ok) throw new Error("run projection HTTP " + r.status);
+      return r.json();
+    })
+    .then((run) => {
+      const facts = [
+        [run.state, "RUN STATE"],
+        [run.maker.model, "MAKER BACKEND"],
+        [String(run.maker.max_concurrent_subagents), "CONCURRENT AGENTS"],
+        [run.theorem_status, "RH STATUS"],
+      ];
+      $("machine-facts").innerHTML = facts.map((f) =>
+        '<div class="fact"><div class="value">' + f[0] + '</div><div class="label">' + f[1] + "</div></div>"
+      ).join("");
+      $("machine-receipt").innerHTML =
+        "run " + run.run_id + "<br>" +
+        "identity sha256:" + run.identity.digest + "<br>" +
+        "policy sha256:" + run.maker.policy_digest + "<br>" +
+        "prompt sha256:" + run.maker.prompt_digest + "<br>" +
+        "backend " + run.maker.backend_status + " · launch_legal " + run.budget.launch_legal;
+      document.querySelectorAll(".stage").forEach((stage) => {
+        stage.classList.toggle("active", stage.getAttribute("data-stage") === run.state);
+      });
+    })
+    .catch((err) => {
+      $("machine-receipt").textContent = "Could not load solver-run projection: " + err.message;
     });
 })();
 </script>
