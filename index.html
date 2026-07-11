@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cutset | What remains</title>
-<meta name="description" content="Cutset is OSMM's query-only residual-frontier instrument. It reads one frozen campaign Ledger snapshot and shows the registered open obligations with provenance.">
+<meta name="description" content="Cutset is OSMM's residual-frontier instrument. Write down every kill so you never forget it. Then compute the still-open set that would finish the goal.">
 <meta name="theme-color" content="#080a0e">
 <link rel="canonical" href="https://cutset.io/">
 <meta property="og:title" content="Cutset | What remains">
-<meta property="og:description" content="Read-only residual frontier for the RH campaign. Lake alone upgrades status.">
+<meta property="og:description" content="Write down every kill so you never forget it. Then ask: what remains?">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cutset.io">
 <style>
@@ -39,7 +39,9 @@ code{font-family:var(--mono);font-size:.92em}
 .hero{padding:72px 0 36px;border-bottom:1px solid var(--line);background:radial-gradient(700px 360px at 50% -20%,rgba(241,109,100,.12),transparent 70%)}
 .kicker{color:var(--accent);font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
 .hero h1{font-size:clamp(34px,6vw,56px);line-height:1.02;letter-spacing:-.045em;margin:0 0 14px;max-width:16ch}
-.hero .dek{color:var(--copy);font-size:18px;max-width:54ch;margin-bottom:22px}
+.hero .vow{margin:0 0 16px;color:var(--ink);font:clamp(18px,2.4vw,23px)/1.35 Georgia,"Times New Roman",serif;max-width:28ch;letter-spacing:-.015em}
+.hero .vow em{color:var(--accent2);font-style:normal}
+.hero .dek{color:var(--copy);font-size:18px;max-width:56ch;margin-bottom:22px}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
 .pill{border:1px solid var(--line2);border-radius:999px;padding:6px 12px;font:12px/1 var(--mono);color:var(--muted)}
 .pill b{color:var(--ink);font-weight:700}
@@ -130,9 +132,10 @@ code{font-family:var(--mono);font-size:.92em}
 
 <header class="hero">
   <div class="wrap">
-    <div class="kicker">Residual frontier instrument</div>
+    <div class="kicker">OSMM · residual frontier instrument</div>
     <h1>What remains.</h1>
-    <p class="dek">Cutset queries one frozen Reverse Mathlib Ledger snapshot and returns the registered open obligations still blocking the goal. This page is live RH dogfood: read-only compose, not a proof engine, memory store, or admission path.</p>
+    <p class="vow">Write down every kill so you <em>never forget it.</em></p>
+    <p class="dek">Research forgets its dead ends. Cutset banks what died, the rule the failure taught, and what still survives, then prints the registered open set that would finish the goal. This page is live RH dogfood: a read-only compose of one frozen Ledger snapshot, not a proof engine and not an admission path. Lake alone upgrades status.</p>
     <div class="pills" id="pills" aria-live="polite"></div>
     <div class="stats" id="stats" aria-live="polite">
       <div class="stat goal"><div class="n" id="n-cut">–</div><div class="l">open residuals</div></div>
@@ -212,10 +215,10 @@ code{font-family:var(--mono);font-size:.92em}
   <div class="wrap" style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;width:100%">
     <div>
       <a class="brand" href="/">Cutset<i>.</i></a>
-      <p style="margin-top:8px">Compute what remains. Never upgrade status.</p>
+      <p style="margin-top:8px">Write down every kill. Compute what remains. Never upgrade status.</p>
     </div>
     <div>
-      <p>Query-only instrument inside <a href="https://osmm.ai">OSMM</a>. Reverse Mathlib owns memory; Ledger admission owns status changes.</p>
+      <p>Query-only instrument inside <a href="https://osmm.ai">OSMM</a>, the operating system that ends the forgetting. Reverse Mathlib owns memory; Ledger admission owns status changes.</p>
       <p><a href="https://github.com/jonwashburn/cutset">site source</a> · RH stays <b style="color:var(--residual)">OPEN</b> until lake says otherwise.</p>
     </div>
   </div>
