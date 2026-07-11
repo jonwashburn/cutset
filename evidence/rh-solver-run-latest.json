@@ -21,7 +21,7 @@
   },
   "identity": {
     "algorithm": "sha256",
-    "digest": "a17098bfe031de24f0b03b318ee7494aa7b484333bf410557d573ade96ddbc26"
+    "digest": "1d97e8a44676e18412988ca1787bcaa68b42d24a30b592323546a2dcc204425a"
   },
   "judge_receipt_count": 0,
   "maker": {
@@ -31,9 +31,9 @@
     "canary_ref": "OS-Machine-Mathematics/runtime/cutset/rh/provider-canary-latest.json",
     "max_concurrent_subagents": 64,
     "model": "gpt-5.6-sol",
-    "policy_digest": "9f9982970df5df64bac62b8e45a8be7e68aa250e8e0a35abc7de890bfc3ab5b2",
+    "policy_digest": "401559fdb393887827637c19a5fe376c14495eb4aae1629c8bda66c854f970fe",
     "policy_id": "rh.sol.cdc-structure.v1",
-    "prompt_digest": "ff94d6358799bf4fe9cf23408d7fa760220f48e269abbd4b0834a6eb4f797bed"
+    "prompt_digest": "5ffaf57adedfda2062af12d9bf3ae2d21f856165f266181cb6ea73afd9a87a2e"
   },
   "non_upgrade": "This projection cannot change theorem status. Canonical state changes only through a signed reverse_mathlib admission receipt.",
   "residual_counts": {
@@ -43,7 +43,7 @@
     "killed_formulations": 30,
     "theorem_edges_used": 21
   },
-  "run_id": "cutset.run.a17098bfe031de24f0b0",
+  "run_id": "cutset.run.1d97e8a44676e1841298",
   "schema": "cutset.public_campaign_run.v1",
   "state": "COMPILED",
   "terminal": null,
