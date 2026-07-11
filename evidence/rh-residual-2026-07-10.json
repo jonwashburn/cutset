@@ -7,29 +7,44 @@
     "status": "OPEN",
     "box": "Riemann/rh_loop/RH_BOX.json",
     "box_schema": "RH_BOX_v2",
-    "box_updated": "2026-07-09",
-    "graph_nodes": 40,
-    "graph_edges": 24,
-    "walls": 23
+    "box_updated": "2026-07-10",
+    "graph_nodes": 87,
+    "graph_edges": 76,
+    "walls": 35
   },
   "provenance": {
     "compiler": "Riemann/rh_loop/rh_box.py compose",
     "command": "python3 Riemann/rh_loop/rh_box.py compose RH --json",
-    "compose_sha256": "254e0a6e1eabca05bea5d94f7a5c91d3438a0c9b01026a42392fe81c467dea67",
+    "compose_sha256": "34377d6d172085df9a9e179214e5f46720db64f883bfce6799361660d7ca3582",
     "visibility": "READ_ONLY_DOGFOOD",
     "authority": "Compose reports registered residual only. Lake/CI alone may promote OPEN to THEOREM. This page never upgrades status."
   },
   "counts": {
-    "cut_set": 10,
-    "closes_goal": 5,
-    "hypothesis_support": 5,
-    "blocked_routes": 1,
-    "killed_formulations": 7
+    "cut_set": 30,
+    "closes_goal": 19,
+    "hypothesis_support": 7,
+    "blocked_routes": 2,
+    "killed_formulations": 30
   },
   "compose": {
     "goal": "RH",
     "goal_status": "OPEN",
     "cut_set": [
+      {
+        "residual_id": "ConcreteXiHerglotzOnRightHalfStrip",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "ConcreteXiHerglotzOnRightHalfStrip"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/RiemannHypothesis/XiSensorPickPositivity.lean"
+        },
+        "statement": "concrete xi Herglotz property on the right half strip",
+        "kind": "certificate"
+      },
       {
         "residual_id": "CriticalStripZeroFreeBridge",
         "path_status": "THEOREM",
@@ -46,6 +61,81 @@
         "kind": "certificate"
       },
       {
+        "residual_id": "DiagonalRealization",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "DiagonalRealization"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/PrimeParticle.lean"
+        },
+        "statement": "diagonal Hilbert-Polya realization",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "ForcedLedgerRealization",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "ForcedLedgerRealization"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/ForcedLedgerRealization.lean"
+        },
+        "statement": "forced ledger realization (inhabit Nonempty)",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "GeneratedPrimeLogReciprocalNeutrality",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "GeneratedPrimeLogReciprocalNeutrality"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/GeneratedLedgerBalance.lean"
+        },
+        "statement": "generated prime-log reciprocal neutrality",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "GeneratedPrimeLogReflectionCollapse",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "GeneratedPrimeLogReflectionCollapse"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/GeneratedLedgerBalance.lean"
+        },
+        "statement": "generated prime-log reflection collapse",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "HilbertPolyaRealization",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "HilbertPolyaRealization"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/HilbertPolyaCriterion.lean"
+        },
+        "statement": "Hilbert-Polya realization",
+        "kind": "certificate"
+      },
+      {
         "residual_id": "LedgerPointBalanceCoupling",
         "path_status": "THEOREM",
         "via": [
@@ -55,9 +145,69 @@
         "honesty": null,
         "blocked_reason": null,
         "spawn": {
-          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann.lean"
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/BalanceMechanism.lean"
         },
         "statement": "LedgerPointBalanceCoupling inhabited",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "NoFinitePrimeObstruction",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "NoFinitePrimeObstruction"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/MasterAuditLink.lean"
+        },
+        "statement": "no finite prime obstruction",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "NonzeroZetaPhaseCompositionBridge",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "NonzeroZetaPhaseCompositionBridge"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/GeneratedLedgerBalance.lean"
+        },
+        "statement": "nonzero zeta phase composition bridge (inhabit Nonempty)",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "ObstructionDefectFree",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "ObstructionDefectFree"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/RecognitionDefectBalance.lean"
+        },
+        "statement": "obstruction theory defect-free",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "PrimeAxisDefectOperatorZero",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "PrimeAxisDefectOperatorZero"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/PrimeAxisOperator.lean"
+        },
+        "statement": "prime-axis defect operator vanishes",
         "kind": "certificate"
       },
       {
@@ -70,9 +220,39 @@
         "honesty": null,
         "blocked_reason": null,
         "spawn": {
-          "lean_module": "IndisputableMonolith/NumberTheory/RH_Certificate.lean"
+          "lean_module": "IndisputableMonolith/NumberTheory/ZetaLedgerBridge.lean"
         },
         "statement": "strip zeros are physical recognition events",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "RealPGPrimeSideNonnegative",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "RealPGPrimeSideNonnegative"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/PGRealAssembly.lean"
+        },
+        "statement": "real PG prime-side functional nonnegative",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "SpectralJBalanced",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "SpectralJBalanced"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/RSDualBalanceCarrier.lean"
+        },
+        "statement": "spectral J-balance",
         "kind": "certificate"
       },
       {
@@ -85,10 +265,39 @@
         "honesty": null,
         "blocked_reason": null,
         "spawn": {
-          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/WeilPositivity.lean",
-          "probe": null
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/WeilConverseCore.lean"
         },
         "statement": "Weil positivity on PG tests",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "WeilPositivityPGDialed",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "WeilPositivityPGDialed"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/WeilConverseAssembly.lean"
+        },
+        "statement": "Weil positivity restricted to the dialed killing family: for all XiNonzeroZero rho0 and t>0, 0 <= Re(weilFunctional (pgTest (killPoly rho0) (dialCenter rho0 t) t)). Strictly thinner than WeilPositivityPG; the proved converse consumes only this family.",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "WitnessedHonestPhaseAdmissibilityBridge",
+        "path_status": "THEOREM",
+        "via": [
+          "RH",
+          "WitnessedHonestPhaseAdmissibilityBridge"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/GeneratedLedgerBalance.lean"
+        },
+        "statement": "witnessed honest-phase admissibility bridge",
         "kind": "certificate"
       },
       {
@@ -105,6 +314,35 @@
         },
         "statement": "xiLedgerCost = 0",
         "kind": "certificate"
+      },
+      {
+        "residual_id": "WeilPositivityGaussian",
+        "path_status": "HYPOTHESIS",
+        "via": [
+          "RH",
+          "WeilPositivityGaussian"
+        ],
+        "honesty": "IMPLICATION_UNPROVED: target_riemannHypothesis_of_weilPositivity is an OPEN Prop",
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/WeilConversePure.lean"
+        },
+        "statement": "Weil positivity on the Gaussian test class (classic WeilPositivity def). The implication to RH is itself an OPEN Prop target (target_riemannHypothesis_of_weilPositivity), unlike the proved PG converse.",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "BPhi_PSD",
+        "path_status": "HYPOTHESIS",
+        "via": [
+          "RH",
+          "channel_square_to_RH",
+          "BPhi_PSD"
+        ],
+        "honesty": "bridge not Lean-closed",
+        "blocked_reason": null,
+        "spawn": null,
+        "statement": "B_Phi positive semidefiniteness: the live-front chain routes through this unnamed step between L2 coercivity and the channel-square bridge.",
+        "kind": "fragment"
       },
       {
         "residual_id": "L1_Po_positivity",
@@ -198,6 +436,71 @@
         },
         "statement": "one-gap gate as positive integral op in t",
         "kind": "fragment"
+      },
+      {
+        "residual_id": "C9_PoleAnnihilatedTateSquare",
+        "path_status": "OPEN_SUPPORT",
+        "via": [
+          "RH",
+          "WeilPositivityPGDialed",
+          "weilPGCausalPolarization",
+          "C9_PoleAnnihilatedTateSquare"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "probe": "exact two-place Tate coefficient audit at S={inf,2,3}, u=1, t=1/2 (Arb 512-bit); any stabilized nonzero mixed coefficient > 2^-160 kills it"
+        },
+        "statement": "Greenlit C9 formulation of the causal square: C^J_{u,t} = T_{u,t} o mult(m_d) with m_d the target-independent minimal polynomial of the boundary-germ spectral operator A_d; B(m_d Q, m_d R) = <T(m_d Q), T(m_d R)> exactly on the dense algebraic Tate core.",
+        "kind": "fragment"
+      },
+      {
+        "residual_id": "DeltaRiemannCriticalStripCert",
+        "path_status": "OPEN_SUPPORT",
+        "via": [
+          "RH",
+          "LedgerPointBalanceCoupling",
+          "DeltaRiemannCriticalStripCert"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/DeltaRiemann/ContentConcentration.lean"
+        },
+        "statement": "DeltaRiemannCriticalStripCert: delta-framework critical-strip certificate supporting the ledger point-balance coupling.",
+        "kind": "fragment"
+      },
+      {
+        "residual_id": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+        "path_status": "OPEN_SUPPORT",
+        "via": [
+          "RH",
+          "CriticalStripZeroFreeBridge",
+          "MovingAnchor_Stage12_PoleCrossingSchurV2"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "probe": "Riemann/rh_loop/xi_moving_anchor_rung01.py"
+        },
+        "statement": "Pole-crossing Schur rung v2: Theta_h(s)=xi(s-h)/xi(s+h) at h=1/8, anchor 1+h, aperture 9/16, positivity carried only at kernel level as the exterior-square Schur complement C_h(s,t). Gate currently emits IDENTITY_ONLY (Stage-0 identity bankable; W_23 comparison open).",
+        "kind": "fragment"
+      },
+      {
+        "residual_id": "weilPGCausalPolarization",
+        "path_status": "OPEN_SUPPORT",
+        "via": [
+          "RH",
+          "WeilPositivityPGDialed",
+          "weilPGCausalPolarization"
+        ],
+        "honesty": null,
+        "blocked_reason": null,
+        "spawn": {
+          "lean_module": "IndisputableMonolith/NumberTheory/ExplicitFormula/WeilConverseAssembly.lean"
+        },
+        "statement": "Committed missing lemma: explicit Hilbert space H and complex-linear C_{u,t} built only from FE/(co-)Poisson transport, Lambda(n)>=0, Stirling, Vasyunin inner products, BC rewrites (no RH-equivalent input) with B_{u,t}(Q,R) = <C Q, C R> polarizing Q -> Re W(pgTest(Q,u,t)), t-uniform. Diagonal yields WeilPositivityPGDialed. NO Lean declaration exists yet (verified absent 2026-07-10).",
+        "kind": "fragment"
       }
     ],
     "blocked_routes": [
@@ -212,6 +515,19 @@
         "blocked_reason": "supplying the cert = assuming RH",
         "spawn": null,
         "statement": "BoundaryTransportCert",
+        "kind": "certificate"
+      },
+      {
+        "residual_id": "RecognitionMetricCert",
+        "path_status": "BLOCKED",
+        "via": [
+          "RH",
+          "RecognitionMetricCert"
+        ],
+        "honesty": null,
+        "blocked_reason": "only surviving HP route is prime-side Weil transport",
+        "spawn": null,
+        "statement": "Nonempty RecognitionMetric iff RH. Blocked as attack: RecognitionMetricRigidity shows an off-line zero forbids the metric, so supplying it presupposes the conclusion.",
         "kind": "certificate"
       }
     ],
@@ -257,17 +573,171 @@
         "killed_by": "W_weight_independent_square",
         "survivor": "",
         "effect": "exclude"
+      },
+      {
+        "id": "SelbergTraceCausalSquare",
+        "killed_by": "W_selberg_trace_indefinite",
+        "survivor": "C9_PoleAnnihilatedTateSquare",
+        "effect": "exclude"
+      },
+      {
+        "id": "VasyuninGramCarleman",
+        "killed_by": "W_vasyunin_gram_is_weil",
+        "survivor": "C9_PoleAnnihilatedTateSquare",
+        "effect": "exclude"
+      },
+      {
+        "id": "MeasureMomentTateSquare",
+        "killed_by": "W_measure_moments_are_weil",
+        "survivor": "C9_PoleAnnihilatedTateSquare",
+        "effect": "exclude"
+      },
+      {
+        "id": "DeBrangesHeatFlowGate",
+        "killed_by": "W_debranges_flow_crossing",
+        "survivor": "weilPGCausalPolarization",
+        "effect": "exclude"
+      },
+      {
+        "id": "LaxPhillipsWeight0Member",
+        "killed_by": "W_lax_phillips_weight0_member",
+        "survivor": "weilPGCausalPolarization",
+        "effect": "exclude"
+      },
+      {
+        "id": "OddBezoutiantMollifierSchur",
+        "killed_by": "W_odd_bezoutiant_mollifier_schur",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "MovingAnchorScalarMeasure",
+        "killed_by": "W_moving_anchor_scalar_measure_landau",
+        "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+        "effect": "exclude"
+      },
+      {
+        "id": "MovingAnchorCrossRatioPick",
+        "killed_by": "W_moving_anchor_crossratio_loewner",
+        "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+        "effect": "exclude"
+      },
+      {
+        "id": "MovingAnchorPureXY6",
+        "killed_by": "W_moving_anchor_pure_xy6",
+        "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+        "effect": "exclude"
+      },
+      {
+        "id": "MovingAnchorFreqDetIdentityRung",
+        "killed_by": "W_moving_anchor_fitted_mollifier",
+        "survivor": "MovingAnchor_Stage12_PoleCrossingSchurV2",
+        "effect": "exclude"
+      },
+      {
+        "id": "RHFreeDirectDomination",
+        "killed_by": "p12f_rhfree_direct_domination",
+        "survivor": "BEZ_ID",
+        "effect": "exclude"
+      },
+      {
+        "id": "TermwisePGPositivity",
+        "killed_by": "W_termwise_pg",
+        "survivor": "WeilPositivityPG",
+        "effect": "exclude"
+      },
+      {
+        "id": "ZeroCompositionWitness",
+        "killed_by": "W_zero_composition_witness",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "DefectAnnularCostBounded",
+        "killed_by": "W_defect_annular_bounded",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "FiniteBandRepair",
+        "killed_by": "W_finite_band_repair",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "FlatWeightMechanism",
+        "killed_by": "W_flat_mechanism",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "RowOnlyTarget",
+        "killed_by": "W_row_only_target",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "AdditivePSDSplit",
+        "killed_by": "W_additive_psd_split",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "CDBoundaryDelta",
+        "killed_by": "W_cd_boundary_delta",
+        "survivor": "L2_coercivity",
+        "effect": "exclude"
+      },
+      {
+        "id": "SeedABDiagonalSOS",
+        "killed_by": "W_seed_A_B",
+        "survivor": "completion_square_current",
+        "effect": "exclude"
+      },
+      {
+        "id": "NCDAsDoor",
+        "killed_by": "W_ncd_as_door",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "PointwiseMixedPencil",
+        "killed_by": "W_pointwise_mixed_pencil",
+        "survivor": "",
+        "effect": "exclude"
+      },
+      {
+        "id": "LiteralSingleSquareOdd",
+        "killed_by": "W_literal_single_square_odd",
+        "survivor": "L1_cutoff_cauchy",
+        "effect": "exclude"
       }
     ],
     "theorem_edges_used": [
       "BoundaryTransportCert->RH",
-      "CriticalStripZeroFreeBridge->RH",
       "RSPhysicalThesis->RH",
+      "defectOperator_eq_zero_iff_riemannHypothesis",
       "delta_iff_RH",
+      "generatedPrimeLogNeutrality_iff_riemannHypothesis",
+      "noFinitePrimeObstruction_iff_riemannHypothesis",
+      "nonempty_diagonalRealization_iff_riemannHypothesis",
+      "nonempty_nonzeroPhaseCompositionBridge_iff_riemannHypothesis",
+      "nonempty_realization_iff_riemannHypothesis",
+      "nonempty_recognitionMetric_iff_riemannHypothesis",
+      "realPGPrimeSideNonnegative_iff_riemannHypothesis",
+      "reflectionCollapse_iff_riemannHypothesis",
+      "rh_from_ZeroInducedProxyPhysicalizationBridge ∘ zeroInducedProxyBridge_of_criticalStripZeroFreeBridge (DeltaRiemann/ProxyClosure)",
+      "riemannHypothesis_iff_nonempty_forcedLedgerRealization",
+      "riemannHypothesis_iff_obstructionDefectFree",
+      "riemannHypothesis_of_concreteXiHerglotz",
+      "riemannHypothesis_of_weilPositivityPGDialed",
+      "spectralJBalanced_iff_riemannHypothesis",
       "weil_pg_iff_RH",
+      "witnessedHonestPhaseAdmissibility_iff_riemannHypothesis",
       "xi_iff_RH"
     ],
     "hypothesis_bridges": [
+      "WeilPositivityGaussian",
       "channel_square_to_RH"
     ],
     "notes": [
