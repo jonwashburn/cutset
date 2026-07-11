@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sign in · Cutset</title>
+<title>RH console · Cutset</title>
 <meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0;url=app.html">
 <meta name="theme-color" content="#080a0e">
 <link rel="canonical" href="https://cutset.io/login.html">
 <style>
@@ -39,48 +40,14 @@ button:hover{filter:brightness(1.05)}
 <body>
 <div class="top">
   <a class="brand" href="/">Cutset<i>.</i></a>
-  <a href="/" style="color:var(--muted);font-size:13px;text-decoration:none">Public frontier</a>
 </div>
 <main class="main">
-  <form class="card" id="form" autocomplete="on">
-    <div class="kicker">Single-user console</div>
-    <h1>Sign in</h1>
-    <p class="dek">One human, one campaign: Riemann Hypothesis. This gate unlocks the private RH console. It does not change theorem status.</p>
-    <label for="user">Username</label>
-    <input id="user" name="username" autocomplete="username" required>
-    <label for="pass">Password</label>
-    <input id="pass" name="password" type="password" autocomplete="current-password" required>
-    <button type="submit">Open RH console</button>
-    <div class="err" id="err" role="alert"></div>
-    <p class="note">Client-side session for dogfood on static hosting. Lake/CI alone may promote OPEN → THEOREM.</p>
-  </form>
+  <div class="card">
+    <div class="kicker">Authentication moved to private backend</div>
+    <h1>Opening RH console</h1>
+    <p class="dek">The public console is a sanitized read-only projection. Static hosting cannot protect private state or launch authority.</p>
+    <p class="note"><a href="app.html">Continue if you are not redirected.</a></p>
+  </div>
 </main>
-<script src="auth.js"></script>
-<script>
-(function () {
-  if (CutsetAuth.isAuthed()) {
-    const next = new URLSearchParams(location.search).get("next") || "app.html";
-    location.replace(next);
-    return;
-  }
-  const form = document.getElementById("form");
-  const err = document.getElementById("err");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    err.classList.remove("show");
-    const res = await CutsetAuth.login(
-      document.getElementById("user").value,
-      document.getElementById("pass").value
-    );
-    if (!res.ok) {
-      err.textContent = res.error;
-      err.classList.add("show");
-      return;
-    }
-    const next = new URLSearchParams(location.search).get("next") || "app.html";
-    location.replace(next.startsWith("/") || next.endsWith(".html") ? next : "app.html");
-  });
-})();
-</script>
 </body>
 </html>

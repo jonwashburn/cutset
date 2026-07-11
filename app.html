@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RH console · Cutset</title>
-<meta name="robots" content="noindex">
+<meta name="robots" content="index,follow">
 <meta name="theme-color" content="#080a0e">
 <style>
 :root{
@@ -84,23 +84,19 @@ h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.035em;margin-bottom:8px}
 </style>
 </head>
 <body>
-<script src="auth.js"></script>
-<script>if (!CutsetAuth.requireAuth("app.html")) { /* redirecting */ }</script>
-
 <nav class="nav">
   <div class="nav-inner">
     <a class="brand" href="app.html">Cutset<i>.</i> <span style="font-weight:500;color:var(--muted);font-size:13px;margin-left:6px">RH console</span></a>
     <div class="nav-right">
-      <span id="who"></span>
+      <span>read-only public snapshot</span>
       <a href="/" style="color:var(--muted)">Public page</a>
-      <button type="button" id="logout">Sign out</button>
     </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <div class="kicker">Campaign console · single user · single problem</div>
+    <div class="kicker">Campaign console · read-only · single problem</div>
     <h1 id="title">Riemann Hypothesis</h1>
     <p class="dek" id="dek">Loading registered campaign state…</p>
     <div class="pills" id="pills"></div>
@@ -183,8 +179,6 @@ h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.035em;margin-bottom:8px}
   let graphFilter = "all";
 
   const $ = (id) => document.getElementById(id);
-  document.getElementById("who").textContent = CutsetAuth.readSession().user;
-  document.getElementById("logout").onclick = () => CutsetAuth.logout();
 
   document.querySelectorAll(".side button").forEach((btn) => {
     btn.addEventListener("click", () => {
