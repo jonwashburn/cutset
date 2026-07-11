@@ -1,0 +1,70 @@
+{
+  "authority": {
+    "authorized": false,
+    "launch_legal": false,
+    "model_output": "UNTRUSTED_ADVICE",
+    "non_upgrade": "This projection has no theorem or launch authority. RH remains OPEN until deterministic proof gates and signed admission pass.",
+    "public_write": false
+  },
+  "budget": {
+    "allocations_usd": {
+      "BLIND": 225,
+      "INFORMED": 225,
+      "SYNTHESIS": 50
+    },
+    "authorized": false,
+    "enforcement_status": "WALL_CANCEL_ENFORCED_DOLLAR_CAP_DECLARATIVE",
+    "launch_legal": false,
+    "max_wall_seconds": {
+      "BLIND": 32400,
+      "INFORMED": 32400,
+      "SYNTHESIS": 32400
+    },
+    "total_usd": 500
+  },
+  "ceilings": {
+    "BLIND": 32,
+    "INFORMED": 32,
+    "SYNTHESIS": 8
+  },
+  "portfolio_id": "cutset.portfolio.c34d278bf4d80e5a597c",
+  "rails": [
+    {
+      "authorized": false,
+      "ceiling": 32,
+      "freeze_state": "UNFROZEN",
+      "frozen_artifact_digest": null,
+      "label": "BLIND",
+      "launch_legal": false,
+      "output_authority": "UNTRUSTED_ADVICE",
+      "policy_digest": "f5529b24e552b8f7b72d74c07d8e3403dc301b17bcaae34ee4d1e0305a82bcd5",
+      "prompt_digest": "ab38c307532be443cea027130b5de89e468abaa4d83152676a35463a9f76a27e",
+      "run_digest": "52b58b0f44ceca476ae9ff5ac83a0a0119ab30832eab75b78e0735cc8102cb37"
+    },
+    {
+      "authorized": false,
+      "ceiling": 32,
+      "freeze_state": "UNFROZEN",
+      "frozen_artifact_digest": null,
+      "label": "INFORMED",
+      "launch_legal": false,
+      "output_authority": "UNTRUSTED_ADVICE",
+      "policy_digest": "93b5354cd77817bc2e2db42e72de1eee5274bd9b32ad3acb935d3681605b7ea8",
+      "prompt_digest": "b48a522d0f4cd435d7789103500ec0a539ca20cab7f98982b33985596677d37f",
+      "run_digest": "05d26dffe3b4741c2c641413e19561b812e15ec0be2846d430f3eac5473d3528"
+    }
+  ],
+  "schema": "cutset.public_dual_rail_campaign.v1",
+  "state": "RAILS_COMPILED_SYNTHESIS_BLOCKED",
+  "synthesis": {
+    "authorized": false,
+    "ceiling": 8,
+    "launch_legal": false,
+    "output_authority": "UNTRUSTED_ADVICE",
+    "policy_digest": "050ee8353b3bff04c49f0b5c708d588a39f8d2f6f8aa9cfd51ff1725067bf8b9",
+    "prompt_digest": null,
+    "run_digest": null,
+    "state": "BLOCKED_PENDING_FROZEN_RAILS"
+  },
+  "theorem_status": "OPEN"
+}
