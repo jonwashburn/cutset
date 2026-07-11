@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cutset | What remains</title>
-<meta name="description" content="Cutset computes the registered residual frontier of a mathematical campaign. RH dogfood: read-only compose over CERT_GRAPH.">
+<meta name="description" content="Cutset is OSMM's query-only residual-frontier instrument. It reads one frozen campaign Ledger snapshot and shows the registered open obligations with provenance.">
 <meta name="theme-color" content="#080a0e">
 <link rel="canonical" href="https://cutset.io/">
 <meta property="og:title" content="Cutset | What remains">
@@ -21,8 +21,8 @@
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans)}
+html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
+body{max-width:100%;overflow-x:hidden;background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans)}
 a{color:var(--accent2);text-decoration:none}
 a:hover{text-decoration:underline}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -84,6 +84,13 @@ code{font-family:var(--mono);font-size:.92em}
   .grid2{grid-template-columns:1fr}
   .role{margin-left:0}
 }
+@media (max-width:620px){
+  .nav-links a:nth-child(2),.nav-links a:nth-child(3){display:none}
+  .nav-inner,.wrap{padding-left:18px;padding-right:18px}
+  .hero{padding-top:58px}
+  .hero .dek{font-size:17px}
+  .stat{min-width:0;padding:13px}
+}
 </style>
 </head>
 <body>
@@ -103,7 +110,7 @@ code{font-family:var(--mono);font-size:.92em}
   <div class="wrap">
     <div class="kicker">Residual frontier instrument</div>
     <h1>What remains.</h1>
-    <p class="dek">Cutset walks a registered certificate graph and returns the open leaves still blocking the goal. This page is the live RH dogfood: read-only compose, not a proof engine.</p>
+    <p class="dek">Cutset queries one frozen Reverse Mathlib Ledger snapshot and returns the registered open obligations still blocking the goal. This page is live RH dogfood: read-only compose, not a proof engine, memory store, or admission path.</p>
     <div class="pills" id="pills" aria-live="polite"></div>
     <div class="stats" id="stats" aria-live="polite">
       <div class="stat goal"><div class="n" id="n-cut">–</div><div class="l">open residuals</div></div>
@@ -120,7 +127,7 @@ code{font-family:var(--mono);font-size:.92em}
       <div class="grid2">
         <div>
           <h2>RH residual frontier</h2>
-          <p class="lead">Each row is still OPEN in the registered box. A theorem-path closer would close RH if inhabited. Hypothesis rows are the live program bet; they do not close alone.</p>
+          <p class="lead">Each row is still OPEN in the registered box. A theorem-path closer would close RH if inhabited. Hypothesis rows do not close alone. Cutset makes no completeness or minimum claim for this frontier.</p>
           <div class="toolbar" role="tablist" aria-label="Frontier filter">
             <button class="tab" role="tab" aria-selected="true" data-filter="all">All</button>
             <button class="tab" role="tab" aria-selected="false" data-filter="THEOREM">Theorem-path</button>
@@ -155,7 +162,7 @@ code{font-family:var(--mono);font-size:.92em}
       <p style="margin-top:8px">Compute what remains. Never upgrade status.</p>
     </div>
     <div>
-      <p>Instrument inside <a href="https://osmm.ai">OSMM</a>.</p>
+      <p>Query-only instrument inside <a href="https://osmm.ai">OSMM</a>. Reverse Mathlib owns memory; Ledger admission owns status changes.</p>
       <p><a href="https://github.com/jonwashburn/cutset">site source</a> · RH stays <b style="color:var(--residual)">OPEN</b> until lake says otherwise.</p>
     </div>
   </div>
@@ -213,7 +220,7 @@ code{font-family:var(--mono);font-size:.92em}
       snap.campaign.box +
       "</code> · updated " +
       (snap.campaign.box_updated || "unknown") +
-      "<br><b>Public write</b> · off. This is read-only dogfood, not a submission surface.";
+      "<br><b>Public write</b> · off. Cutset is query-only: it does not store walls, admit status, or claim this frontier is globally minimal.";
   }
 
   function cardResidual(r, goal) {
